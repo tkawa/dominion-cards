@@ -2,22 +2,6 @@
 .page-header
   %h1= model_class.model_name.human
 
-.well
-  = form_tag nil do
-    %legend Select sets:
-    - Card.set.options.each do |(set_text, set)|
-      %label.checkbox
-        = check_box_tag "sets[#{set}]"
-        = set_text
-    %legend Costs options:
-    %label.radio
-      = radio_button_tag 'costs', 'each_plus6', true
-      = t 'each_plus6', scope: :costs_option
-    %label.radio
-      = radio_button_tag 'costs', 'random'
-      = t 'random', scope: :costs_option
-    = submit_tag 'Create', name: nil, class: 'btn'
-
 %table.table.table-striped
   %thead
     %tr
