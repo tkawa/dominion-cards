@@ -1,58 +1,20 @@
-= form_for @card do |f|
-  - if @card.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@card.errors.count, "error")} prohibited this card from being saved:"
-      %ul
-        - @card.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name_j
-    = f.text_field :name_j
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :kana
-    = f.text_field :kana
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :set
-    = f.text_field :set
-  .field
-    = f.label :cost
-    = f.number_field :cost
-  .field
-    = f.label :potion
-    = f.number_field :potion
-  .field
-    = f.label :division
-    = f.text_field :division
-  .field
-    = f.label :kind
-    = f.text_field :kind
-  .field
-    = f.label :treasure
-    = f.number_field :treasure
-  .field
-    = f.label :victory
-    = f.number_field :victory
-  .field
-    = f.label :cards
-    = f.number_field :cards
-  .field
-    = f.label :actions
-    = f.number_field :actions
-  .field
-    = f.label :buys
-    = f.number_field :buys
-  .field
-    = f.label :coins
-    = f.number_field :coins
-  .field
-    = f.label :vp_tokens
-    = f.number_field :vp_tokens
-  .actions
-    = f.submit 'Save'
+= simple_form_for @card, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :name_j
+  = f.input :description
+  = f.input :kana
+  = f.input :name
+  = f.input :set
+  = f.input :cost
+  = f.input :potion
+  = f.input :division
+  = f.input :kind
+  = f.input :treasure
+  = f.input :victory
+  = f.input :cards
+  = f.input :actions
+  = f.input :buys
+  = f.input :coins
+  = f.input :vp_tokens
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), cards_path, :class => 'btn'

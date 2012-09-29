@@ -1,54 +1,73 @@
-%p#notice= notice
+- model_class = Card
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
 
 %p
-  %b Name j:
+  %strong= model_class.human_attribute_name(:name_j) + ':'
+  %br
   = @card.name_j
 %p
-  %b Description:
+  %strong= model_class.human_attribute_name(:description) + ':'
+  %br
   = @card.description
 %p
-  %b Kana:
+  %strong= model_class.human_attribute_name(:kana) + ':'
+  %br
   = @card.kana
 %p
-  %b Name:
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
   = @card.name
 %p
-  %b Set:
+  %strong= model_class.human_attribute_name(:set) + ':'
+  %br
   = @card.set
 %p
-  %b Cost:
+  %strong= model_class.human_attribute_name(:cost) + ':'
+  %br
   = @card.cost
 %p
-  %b Potion:
+  %strong= model_class.human_attribute_name(:potion) + ':'
+  %br
   = @card.potion
 %p
-  %b Division:
+  %strong= model_class.human_attribute_name(:division) + ':'
+  %br
   = @card.division
 %p
-  %b Kind:
+  %strong= model_class.human_attribute_name(:kind) + ':'
+  %br
   = @card.kind
 %p
-  %b Treasure:
+  %strong= model_class.human_attribute_name(:treasure) + ':'
+  %br
   = @card.treasure
 %p
-  %b Victory:
+  %strong= model_class.human_attribute_name(:victory) + ':'
+  %br
   = @card.victory
 %p
-  %b Cards:
+  %strong= model_class.human_attribute_name(:cards) + ':'
+  %br
   = @card.cards
 %p
-  %b Actions:
+  %strong= model_class.human_attribute_name(:actions) + ':'
+  %br
   = @card.actions
 %p
-  %b Buys:
+  %strong= model_class.human_attribute_name(:buys) + ':'
+  %br
   = @card.buys
 %p
-  %b Coins:
+  %strong= model_class.human_attribute_name(:coins) + ':'
+  %br
   = @card.coins
 %p
-  %b Vp tokens:
+  %strong= model_class.human_attribute_name(:vp_tokens) + ':'
+  %br
   = @card.vp_tokens
 
-= link_to 'Edit', edit_card_path(@card)
-\|
-= link_to 'Back', cards_path
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), cards_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_card_path(@card), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), card_path(@card), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

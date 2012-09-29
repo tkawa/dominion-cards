@@ -1,49 +1,49 @@
-%h1 Listing cards
-
-%table
-  %tr
-    %th Name j
-    %th Description
-    %th Kana
-    %th Name
-    %th Set
-    %th Cost
-    %th Potion
-    %th Division
-    %th Kind
-    %th Treasure
-    %th Victory
-    %th Cards
-    %th Actions
-    %th Buys
-    %th Coins
-    %th Vp tokens
-    %th
-    %th
-    %th
-
-  - @cards.each do |card|
+- model_class = Card
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
     %tr
-      %td= card.name_j
-      %td= card.description
-      %td= card.kana
-      %td= card.name
-      %td= card.set
-      %td= card.cost
-      %td= card.potion
-      %td= card.division
-      %td= card.kind
-      %td= card.treasure
-      %td= card.victory
-      %td= card.cards
-      %td= card.actions
-      %td= card.buys
-      %td= card.coins
-      %td= card.vp_tokens
-      %td= link_to 'Show', card
-      %td= link_to 'Edit', edit_card_path(card)
-      %td= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' }
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:name_j)
+      -#%th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:kana)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:set)
+      %th= model_class.human_attribute_name(:cost)
+      %th= model_class.human_attribute_name(:potion)
+      %th= model_class.human_attribute_name(:division)
+      %th= model_class.human_attribute_name(:kind)
+      %th= model_class.human_attribute_name(:treasure)
+      %th= model_class.human_attribute_name(:victory)
+      %th= model_class.human_attribute_name(:cards)
+      %th= model_class.human_attribute_name(:actions)
+      %th= model_class.human_attribute_name(:buys)
+      %th= model_class.human_attribute_name(:coins)
+      %th= model_class.human_attribute_name(:vp_tokens)
+      -#%th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @cards.each do |card|
+      %tr
+        %td= link_to card.id, card_path(card)
+        %td= card.name_j
+        -#%td= card.description
+        %td= card.kana
+        %td= card.name
+        %td= card.set
+        %td= card.cost
+        %td= card.potion
+        %td= card.division
+        %td= card.kind
+        %td= card.treasure
+        %td= card.victory
+        %td= card.cards
+        %td= card.actions
+        %td= card.buys
+        %td= card.coins
+        %td= card.vp_tokens
+        -#%td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_card_path(card), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), card_path(card), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-%br
-
-= link_to 'New Card', new_card_path
+= link_to t('.new', :default => t("helpers.links.new")), new_card_path, :class => 'btn btn-primary'
