@@ -12,14 +12,6 @@
       %th= model_class.human_attribute_name(:potion)
       %th= model_class.human_attribute_name(:division)
       %th= model_class.human_attribute_name(:kind)
-      %th= model_class.human_attribute_name(:treasure)
-      %th= model_class.human_attribute_name(:victory)
-      %th= model_class.human_attribute_name(:cards)
-      %th= model_class.human_attribute_name(:actions)
-      %th= model_class.human_attribute_name(:buys)
-      %th= model_class.human_attribute_name(:coins)
-      %th= model_class.human_attribute_name(:vp_tokens)
-      -#%th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @cards.each do |card|
       %tr
@@ -31,15 +23,3 @@
         %td= card.potion
         %td= card.division
         %td= card.kind
-        %td= card.treasure
-        %td= card.victory
-        %td= card.cards
-        %td= card.actions
-        %td= card.buys
-        %td= card.coins
-        %td= card.vp_tokens
-        -#%td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_card_path(card), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), card_path(card), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
-
--#= link_to t('.new', :default => t("helpers.links.new")), new_card_path, :class => 'btn btn-primary'
