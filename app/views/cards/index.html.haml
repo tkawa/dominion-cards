@@ -1,0 +1,49 @@
+%h1 Listing cards
+
+%table
+  %tr
+    %th Name j
+    %th Description
+    %th Kana
+    %th Name
+    %th Set
+    %th Cost
+    %th Potion
+    %th Division
+    %th Kind
+    %th Treasure
+    %th Victory
+    %th Cards
+    %th Actions
+    %th Buys
+    %th Coins
+    %th Vp tokens
+    %th
+    %th
+    %th
+
+  - @cards.each do |card|
+    %tr
+      %td= card.name_j
+      %td= card.description
+      %td= card.kana
+      %td= card.name
+      %td= card.set
+      %td= card.cost
+      %td= card.potion
+      %td= card.division
+      %td= card.kind
+      %td= card.treasure
+      %td= card.victory
+      %td= card.cards
+      %td= card.actions
+      %td= card.buys
+      %td= card.coins
+      %td= card.vp_tokens
+      %td= link_to 'Show', card
+      %td= link_to 'Edit', edit_card_path(card)
+      %td= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Card', new_card_path

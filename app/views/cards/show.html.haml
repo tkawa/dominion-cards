@@ -1,0 +1,54 @@
+%p#notice= notice
+
+%p
+  %b Name j:
+  = @card.name_j
+%p
+  %b Description:
+  = @card.description
+%p
+  %b Kana:
+  = @card.kana
+%p
+  %b Name:
+  = @card.name
+%p
+  %b Set:
+  = @card.set
+%p
+  %b Cost:
+  = @card.cost
+%p
+  %b Potion:
+  = @card.potion
+%p
+  %b Division:
+  = @card.division
+%p
+  %b Kind:
+  = @card.kind
+%p
+  %b Treasure:
+  = @card.treasure
+%p
+  %b Victory:
+  = @card.victory
+%p
+  %b Cards:
+  = @card.cards
+%p
+  %b Actions:
+  = @card.actions
+%p
+  %b Buys:
+  = @card.buys
+%p
+  %b Coins:
+  = @card.coins
+%p
+  %b Vp tokens:
+  = @card.vp_tokens
+
+= link_to 'Edit', edit_card_path(@card)
+\|
+= link_to 'Back', cards_path
