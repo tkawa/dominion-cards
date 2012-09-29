@@ -215,3 +215,17 @@ ja:
         coins: +コイン
         vp_tokens: +VPトークン
         description: 詳細
+  enumerize:
+    card:
+      set:
+        base: 基本
+        intrigue: 陰謀
+        seaside: 海辺
+        alchemy: 錬金術
+        prosperity: 繁栄
+        cornucopia: 収穫祭
+        hinterlands: 異郷
+        promo: プロモ
+  costs_option:
+    each_plus6: 2〜5から1枚ずつ+6枚
+    random: 完全ランダム

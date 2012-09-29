@@ -1,0 +1,72 @@
+- model_class = Card
+.page-header
+  %h1 Card pick
+
+- @cards.each do |card|
+  %p
+    %strong= model_class.human_attribute_name(:name_j) + ':'
+    %br
+    = card.name_j
+  %p
+    %strong= model_class.human_attribute_name(:kana) + ':'
+    %br
+    = card.kana
+  %p
+    %strong= model_class.human_attribute_name(:name) + ':'
+    %br
+    = card.name
+  %p
+    %strong= model_class.human_attribute_name(:set) + ':'
+    %br
+    = card.set
+  %p
+    %strong= model_class.human_attribute_name(:cost) + ':'
+    %br
+    = card.cost
+  %p
+    %strong= model_class.human_attribute_name(:potion) + ':'
+    %br
+    = card.potion
+  %p
+    %strong= model_class.human_attribute_name(:division) + ':'
+    %br
+    = card.division
+  %p
+    %strong= model_class.human_attribute_name(:kind) + ':'
+    %br
+    = card.kind
+  %p
+    %strong= model_class.human_attribute_name(:treasure) + ':'
+    %br
+    = card.treasure
+  %p
+    %strong= model_class.human_attribute_name(:victory) + ':'
+    %br
+    = card.victory
+  %p
+    %strong= model_class.human_attribute_name(:cards) + ':'
+    %br
+    = card.cards
+  %p
+    %strong= model_class.human_attribute_name(:actions) + ':'
+    %br
+    = card.actions
+  %p
+    %strong= model_class.human_attribute_name(:buys) + ':'
+    %br
+    = card.buys
+  %p
+    %strong= model_class.human_attribute_name(:coins) + ':'
+    %br
+    = card.coins
+  %p
+    %strong= model_class.human_attribute_name(:vp_tokens) + ':'
+    %br
+    = card.vp_tokens
+  %p
+    %strong= model_class.human_attribute_name(:description) + ':'
+    %br
+    = card.description.html_safe
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), cards_path, :class => 'btn'

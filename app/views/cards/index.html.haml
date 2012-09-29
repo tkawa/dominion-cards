@@ -1,6 +1,23 @@
 - model_class = Card
 .page-header
   %h1= model_class.model_name.human
+
+.well
+  = form_tag nil do
+    %legend Select sets:
+    - Card.set.options.each do |(set_text, set)|
+      %label.checkbox
+        = check_box_tag "sets[#{set}]"
+        = set_text
+    %legend Costs options:
+    %label.radio
+      = radio_button_tag 'costs', 'each_plus6', true
+      = t 'each_plus6', scope: :costs_option
+    %label.radio
+      = radio_button_tag 'costs', 'random'
+      = t 'random', scope: :costs_option
+    = submit_tag 'Create', name: nil, class: 'btn'
+
 %table.table.table-striped
   %thead
     %tr
@@ -18,7 +35,7 @@
         %th= link_to card.name_j, card
         %td= card.kana
         %td= card.name
-        %td= card.set
+        %td= card.set.text
         %td= card.cost
         %td= card.potion
         %td= card.division
