@@ -1,3 +1,3 @@
 DominionCardsApp::Application.routes.draw do
-  resources :cards
+  resources :cards, only: [:show, :index]
 end
