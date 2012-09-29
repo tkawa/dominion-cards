@@ -1,7 +1,7 @@
 %h1 ドミニオンカードリスト & ランダムピッカー
 
 .well
-  = form_tag nil do
+  = form_tag cards_path do
     %legend Select sets:
     - Card.set.options.each do |(set_text, set)|
       %label.checkbox

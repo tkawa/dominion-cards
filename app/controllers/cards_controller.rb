@@ -10,25 +10,25 @@ class CardsController < ApplicationController
     end
   end
 
-  # GET /cards/1
-  # GET /cards/1.json
   def show
-    @card = Card.find(params[:id])
+    if params[:id].match(/\w+,\w+/)
+      # GET /cards/1,2,3,4,5,6,7,8,9,10
+      # GET /cards/1,2,3,4,5,6,7,8,9,10.json
+      @cards = Card.find(params[:id].split(','))
 
-    respond_to do |format|
-      format.html # show.html.haml
-      format.json { render json: @card }
-    end
-  end
+      respond_to do |format|
+        format.html { render :pick } # pick.html.haml
+        format.json { render json: @cards }
+      end
+    else
+      # GET /cards/1
+      # GET /cards/1.json
+      @card = Card.find(params[:id])
 
-  # GET /cards/1,2,3,4,5,6,7,8,9,10
-  # GET /cards/1,2,3,4,5,6,7,8,9,10.json
-  def pick
-    @cards = Card.find(params[:ids].split(','))
-
-    respond_to do |format|
-      format.html # pick.html.haml
-      format.json { render json: @cards }
+      respond_to do |format|
+        format.html # show.html.haml
+        format.json { render json: @card }
+      end
     end
   end
 
