@@ -101,6 +101,7 @@ GEM
     net-http-persistent (2.7)
     nokogiri (1.5.5)
     ntlm-http (0.1.1)
+    pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -196,6 +197,7 @@ DEPENDENCIES
   hpricot (>= 0.8.6)
   i18n_generators
   jquery-rails
+  pg
   rails (= 3.2.8)
   rspec-rails (>= 2.11.0)
   ruby_parser (>= 2.3.1)
