@@ -13,11 +13,11 @@
 %p
   %strong= model_class.human_attribute_name(:set) + ':'
   %br
-  = @card.set.text
+  %span.set= @card.set.text
 %p
   %strong= model_class.human_attribute_name(:cost) + ':'
   %br
-  = @card.cost
+  %span.coin= @card.cost
 %p
   %strong= model_class.human_attribute_name(:potion) + ':'
   %br

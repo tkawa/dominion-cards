@@ -17,6 +17,8 @@
         %th= link_to card.name_j, card
         %td= card.kana
         %td= card.name
-        %td= card.set.text
-        %td= card.cost_p
+        %td
+          %span.set= card.set.text
+        %td
+          %span.coin= card.cost_p
         %td= card.kind

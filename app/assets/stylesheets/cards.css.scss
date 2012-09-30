@@ -18,3 +18,10 @@ h2.name {
 .description hr {
   display: none;
 }
+span.coin {
+  @extend .badge;
+  @extend .badge-warning;
+}
+span.set {
+  @extend .label;
+}

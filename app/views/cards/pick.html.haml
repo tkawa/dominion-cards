@@ -10,18 +10,18 @@
     - @cards.each do |card|
       %li
         = link_to "##{card.canonical_name}" do
-          %strong= card.name_j
-        (#{card.cost_p}) #{card.set.text}
+          %strong>= card.name_j
+        %span.coin= card.cost_p
+        %span.set= card.set.text
   .tweet
     = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button", data: {lang: 'ja', count: 'none', size: 'large'}
 - @cards.each do |card|
   %section.card{id: card.canonical_name}
     %header
       %h2.name= card.name_j
-      %p.cost
-        (#{card.cost_p}) #{card.set.text}
-      %p.kind
-        = card.kind
+      %span.coin= card.cost_p
+      %span.set= card.set.text
+      %span.kind= card.kind
     .description
       = card.description.html_safe
 
