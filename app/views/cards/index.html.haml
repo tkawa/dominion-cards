@@ -10,8 +10,6 @@
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:set)
       %th= model_class.human_attribute_name(:cost)
-      %th= model_class.human_attribute_name(:potion)
-      %th= model_class.human_attribute_name(:division)
       %th= model_class.human_attribute_name(:kind)
   %tbody
     - @cards.each do |card|
@@ -20,7 +18,5 @@
         %td= card.kana
         %td= card.name
         %td= card.set.text
-        %td= card.cost
-        %td= card.potion
-        %td= card.division
+        %td= card.cost_p
         %td= card.kind
