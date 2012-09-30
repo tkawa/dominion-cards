@@ -14,7 +14,7 @@ class CardsController < ApplicationController
     if params[:id].match(/\w+,\w+/)
       # GET /cards/1,2,3,4,5,6,7,8,9,10
       # GET /cards/1,2,3,4,5,6,7,8,9,10.json
-      @cards = Card.find(params[:id].split(','))
+      @cards = Card.where(:id => params[:id].split(',')).order(:cost, :potion)
 
       respond_to do |format|
         format.html { render :pick } # pick.html.haml
@@ -36,7 +36,18 @@ class CardsController < ApplicationController
   # POST /cards.json
   def create
     sets = params[:sets].select{|k,v| v.to_i == 1 }.keys
-    ids = Card.where(:set => sets).pluck(:id).sample(10).sort
-    redirect_to card_url(id: ids.join(',')), status: :see_other # 303
+    cards = Card.kingdom.where(:set => sets)
+    pick_ids = []
+    if params[:costs] == 'each_plus6'
+      (2..5).each do |cost|
+        pick = cards.find_all {|card| card.cost == cost }.sample
+        pick_ids << pick.id if pick
+      end
+      cards.delete_if {|card| pick_ids.include?(card.id) }
+      pick_ids.concat(cards.sample(10 - pick_ids.size).map(&:id))
+    else # random
+      pick_ids = cards.pluck(:id).sample(10)
+    end
+    redirect_to card_url(id: pick_ids.sort.join(',')), status: :see_other # 303
   end
 end

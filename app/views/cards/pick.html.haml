@@ -2,32 +2,38 @@
 .page-header
   %h1 Card pick
 
+%ul.well
+  - @cards.each do |card|
+    %li
+      %strong= card.name_j
+      (#{card.cost_p}: #{card.set.text})
+
 - @cards.each do |card|
   %p
     %strong= model_class.human_attribute_name(:name_j) + ':'
     %br
     = card.name_j
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:kana) + ':'
     %br
     = card.kana
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:name) + ':'
     %br
     = card.name
   %p
     %strong= model_class.human_attribute_name(:set) + ':'
     %br
-    = card.set
+    = card.set.text
   %p
     %strong= model_class.human_attribute_name(:cost) + ':'
     %br
     = card.cost
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:potion) + ':'
     %br
     = card.potion
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:division) + ':'
     %br
     = card.division
@@ -35,31 +41,31 @@
     %strong= model_class.human_attribute_name(:kind) + ':'
     %br
     = card.kind
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:treasure) + ':'
     %br
     = card.treasure
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:victory) + ':'
     %br
     = card.victory
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:cards) + ':'
     %br
     = card.cards
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:actions) + ':'
     %br
     = card.actions
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:buys) + ':'
     %br
     = card.buys
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:coins) + ':'
     %br
     = card.coins
-  %p
+  -#%p
     %strong= model_class.human_attribute_name(:vp_tokens) + ':'
     %br
     = card.vp_tokens
