@@ -12,6 +12,6 @@ class Card < ActiveRecord::Base
     "#{cost}#{'p' * potion.to_i}"
   end
   def image_url(size = 'small-ja')
-    "http://dominion-cards.s3-ap-northeast-1.amazonaws.com/#{size}/#{name.tr("'", "").camelize.gsub(/\s/, '')}.png"
+    "http://dominion-cards.s3-ap-northeast-1.amazonaws.com/#{size}/#{canonical_name.camelize.gsub(/\s/, '')}.png"
   end
 end
