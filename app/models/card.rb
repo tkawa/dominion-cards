@@ -5,7 +5,13 @@ class Card < ActiveRecord::Base
 
   scope :kingdom, -> { where(:division => '王国') }
 
+  def canonical_name
+    name.parameterize.underscore
+  end
   def cost_p
     "#{cost}#{'p' * potion.to_i}"
+  end
+  def image_url(size = 'small-ja')
+    "http://dominion-cards.s3-ap-northeast-1.amazonaws.com/#{size}/#{name.camelize.gsub(/\s/, '')}.png"
   end
 end

@@ -1,3 +1,20 @@
-// Place all the styles related to the Cards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+ul.picks {
+  margin-bottom: 0;
+}
+section.card {
+  margin-bottom: 20px;
+  border: 1px solid #E3E3E3;
+  @include border-radius(6px);
+  & > * {
+    padding: 4px;
+  }
+  header > * {
+    display: inline;
+  }
+}
+h2.name {
+  font-size: 20px;
+}
+.description hr {
+  display: none;
+}

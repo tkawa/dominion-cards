@@ -1,78 +1,28 @@
-- model_class = Card
-.page-header
+.page-header(style="display:none;")
   %h1 Card pick
 
-%ul.well
-  - @cards.each do |card|
-    %li
-      %strong= card.name_j
-      (#{card.cost_p}: #{card.set.text})
+.well
+  %p.images
+    - @cards.each do |card|
+      = link_to image_tag(card.image_url, alt: card.name), "##{card.canonical_name}"
+
+  %ul.picks
+    - @cards.each do |card|
+      %li
+        = link_to "##{card.canonical_name}" do
+          %strong= card.name_j
+        (#{card.cost_p}) #{card.set.text}
 
 - @cards.each do |card|
-  %p
-    %strong= model_class.human_attribute_name(:name_j) + ':'
-    %br
-    = card.name_j
-  -#%p
-    %strong= model_class.human_attribute_name(:kana) + ':'
-    %br
-    = card.kana
-  -#%p
-    %strong= model_class.human_attribute_name(:name) + ':'
-    %br
-    = card.name
-  %p
-    %strong= model_class.human_attribute_name(:set) + ':'
-    %br
-    = card.set.text
-  %p
-    %strong= model_class.human_attribute_name(:cost) + ':'
-    %br
-    = card.cost
-  -#%p
-    %strong= model_class.human_attribute_name(:potion) + ':'
-    %br
-    = card.potion
-  -#%p
-    %strong= model_class.human_attribute_name(:division) + ':'
-    %br
-    = card.division
-  %p
-    %strong= model_class.human_attribute_name(:kind) + ':'
-    %br
-    = card.kind
-  -#%p
-    %strong= model_class.human_attribute_name(:treasure) + ':'
-    %br
-    = card.treasure
-  -#%p
-    %strong= model_class.human_attribute_name(:victory) + ':'
-    %br
-    = card.victory
-  -#%p
-    %strong= model_class.human_attribute_name(:cards) + ':'
-    %br
-    = card.cards
-  -#%p
-    %strong= model_class.human_attribute_name(:actions) + ':'
-    %br
-    = card.actions
-  -#%p
-    %strong= model_class.human_attribute_name(:buys) + ':'
-    %br
-    = card.buys
-  -#%p
-    %strong= model_class.human_attribute_name(:coins) + ':'
-    %br
-    = card.coins
-  -#%p
-    %strong= model_class.human_attribute_name(:vp_tokens) + ':'
-    %br
-    = card.vp_tokens
-  %p
-    %strong= model_class.human_attribute_name(:description) + ':'
-    %br
-    = card.description.html_safe
+  %section.card{id: card.canonical_name}
+    %header
+      %h2.name= card.name_j
+      %p.cost
+        (#{card.cost_p}) #{card.set.text}
+      %p.kind
+        = card.kind
+    .description
+      = card.description.html_safe
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), cards_path, :class => 'btn'

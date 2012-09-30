@@ -1,4 +1,16 @@
 @import "bootstrap";
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
+//@media (max-width: 767px) {
+//  body {
+//    padding-left: 10px;
+//    padding-right: 10px;
+//  }
+//  .navbar .brand {
+//    margin-left: 5px;
+//  }
+//  .navbar .btn-navbar {
+//    margin-right: 10px;
+//  }
+//}
 @import "cards";

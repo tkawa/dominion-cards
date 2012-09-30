@@ -32,11 +32,8 @@
               %li= link_to 'ランダムピッカー', root_path
 
     .container-fluid
+      = yield
 
-      .row-fluid
-        .span12
-          = yield
-    
       %footer
         %p
           &copy;
