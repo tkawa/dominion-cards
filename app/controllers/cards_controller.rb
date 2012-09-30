@@ -14,7 +14,7 @@ class CardsController < ApplicationController
     if params[:id].match(/\w+,\w+/)
       # GET /cards/1,2,3,4,5,6,7,8,9,10
       # GET /cards/1,2,3,4,5,6,7,8,9,10.json
-      @cards = Card.where(:id => params[:id].split(',')).order(:cost, :potion)
+      @cards = Card.where(:id => params[:id].split(',')).order('COALESCE(cost, 0), COALESCE(potion, 0)')
 
       respond_to do |format|
         format.html { render :pick } # pick.html.haml
