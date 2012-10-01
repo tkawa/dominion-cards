@@ -1,4 +1,5 @@
 DominionCardsApp::Application.routes.draw do
-  resources :cards, only: [:show, :index, :create]
+  resources :picks, only: [:show, :index, :create]
+  resources :cards, only: [:show, :index]
   root to: 'home#index'
 end
