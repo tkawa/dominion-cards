@@ -8,6 +8,8 @@ legend {
   line-height: 30px;
 }
 ul.picks {
+  @extend .unstyled;
+  margin-left: 15px;
   margin-bottom: 0;
 }
 section.card {

@@ -9,9 +9,9 @@
   %ul.picks
     - @cards.each do |card|
       %li
+        %span.coin= card.cost_p
         = link_to "##{card.canonical_name}" do
           %strong>= card.name_j
-        %span.coin= card.cost_p
         %span.set= card.set.text
   .tweet
     = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button", data: {lang: 'ja', count: 'none', size: 'large'}
@@ -26,4 +26,4 @@
       = card.description.html_safe
 
 .form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), cards_path, :class => 'btn'
+  = link_to t('.back', :default => t("helpers.links.back")), root_path, :class => 'btn'
