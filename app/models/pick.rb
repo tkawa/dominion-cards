@@ -9,7 +9,11 @@ class Pick
   OPTIONS = [:no_potion, :no_prize]
   OPTIONS_FOR_SELECT = OPTIONS.map{|o| [I18n.t(o, scope: 'enumerize.pick.options'), o] }
   attribute :cost_condition
-  enumerize :cost_condition, :in => [:each_plus6, :random], default: :each_plus6
+  enumerize :cost_condition, :in => [:each_plus6, :random, :manual], default: :each_plus6
+  attribute :counts
+  COUNTS = [:auto, 0, 1, 2, 3, 4, 5, 6]
+  COUNTS_FOR_SELECT = COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
+                                                      : [I18n.t(n, scope: 'enumerize.pick.details'), n] }
 
   @@pascals = [[1]]
   1.upto(180) do |i|
@@ -65,6 +69,14 @@ class Pick
         self.card_ids << card.id if card
       end
       cards.delete_if {|card| self.card_ids.include?(card.id) }
+      self.card_ids.concat(cards.sample(10 - self.card_ids.size).map(&:id))
+    elsif self.cost_condition == 'manual'
+      self.counts.each do |cost, count|
+        next if count == 'auto'
+        card = cards.find_all {|c| c.cost == cost.to_i }.sample(count.to_i)
+        self.card_ids.concat(card.map(&:id))
+        cards.delete_if {|c| c.cost == cost.to_i }
+      end
       self.card_ids.concat(cards.sample(10 - self.card_ids.size).map(&:id))
     else # cost_condition == 'random'
       self.card_ids = cards.pluck(:id).sample(10)

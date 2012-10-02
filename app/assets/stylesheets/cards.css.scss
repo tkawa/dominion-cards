@@ -2,12 +2,24 @@ h1 {
   font-size: 24px;
 }
 label.control-label {
-  @extend legend;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  line-height: 30px;
+  &.sets, &.options, &.cost_condition {
+    @extend legend;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 30px;
+  }
 }
+select.counts {
+  width: 100px;
+}
+input[type="submit"] {
+  @extend .btn;
+  @extend .btn-large;
+  @extend .btn-block;
+  @extend .btn-primary;
+}
+
 ul.picks {
   @extend .unstyled;
   margin-left: 15px;

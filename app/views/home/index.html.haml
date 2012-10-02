@@ -4,6 +4,10 @@
   = simple_form_for @pick do |f|
     = f.input :sets, as: :check_boxes, collection: Card.set.options, label_method: :first, value_method: :last, label_html: { class: 'sets' }
     = f.input :options, as: :check_boxes, collection: Pick::OPTIONS_FOR_SELECT, label_method: :first, value_method: :last, label_html: { class: 'options' }
-    = f.input :cost_condition, as: :radio_buttons
+    = f.input :cost_condition, as: :radio_buttons, label_html: { class: 'cost_condition' }
+    %fieldset.cost_details
+      = f.simple_fields_for :counts do |field|
+        - (2..6).each do |cost|
+          = field.input cost, collection: Pick::COUNTS_FOR_SELECT, prompt: nil, wrapper: :default, required: false, input_html: { class: 'counts' }, label_html: { class: 'radio inline' }
     %p ※ 繁栄には2コストのカードはありません
-    = f.submit 'Create', class: 'btn'
+    = f.submit 'Create'

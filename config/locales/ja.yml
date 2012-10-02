@@ -235,6 +235,10 @@ ja:
       cost_condition:
         each_plus6: 2〜5から1枚ずつ+6枚
         random: 完全ランダム
+        manual: 指定する
+      details:
+        auto: 自動
+        number: '%{count} 枚'
   simple_form:
     labels:
       pick:
