@@ -226,6 +226,15 @@ ja:
         cornucopia: 収穫祭
         hinterlands: 異郷
         promo: プロモ
+    pick:
+      cost_option: &costs
+        each_plus6: 2〜5から1枚ずつ+6枚
+        random: 完全ランダム
   costs_option:
     each_plus6: 2〜5から1枚ずつ+6枚
     random: 完全ランダム
+  simple_form:
+    labels:
+      pick:
+        sets: 'セット選択:'
+        cost_option: 'コストオプション:'

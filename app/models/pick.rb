@@ -1,4 +1,13 @@
 class Pick
+  include ActiveAttr::Model
+  include Enumerize
+
+  attribute :id
+  attribute :card_ids, default: []
+  attribute :sets, default: ['base']
+  attribute :cost_option, default: :each_plus6
+  enumerize :cost_option, :in => [:each_plus6, :random]
+
   @@pascals = [[1]]
   1.upto(180) do |i|
     @@pascals << 1.upto(i-1).map {|j| @@pascals[i-1][j-1] + @@pascals[i-1][j] }.unshift(1).push(1)
@@ -9,9 +18,9 @@ class Pick
 
   def self.card_ids_to_pick_id(card_ids)
     raise ArgumentError.new('array size is not 10') unless card_ids.size == 10
-    result = 0
-    card_ids.map(&:to_i).sort.each_with_index {|id, index| result += combination(id, index + 1) }
-    result
+    pick_id = 0
+    card_ids.map(&:to_i).sort.each_with_index {|id, index| pick_id += combination(id, index + 1) }
+    pick_id
   end
   def self.pick_id_to_card_ids(pick_id)
     raise ArgumentError.new('number is too large') if pick_id >= self.combination(180, 10)
@@ -23,5 +32,32 @@ class Pick
       pick_id -= combination(n-1, r)
     end
     card_ids.sort
+  end
+
+  def do_pick
+    return false unless valid?
+    randomize
+    self.id = Pick.card_ids_to_pick_id(card_ids)
+  end
+
+  def to_param
+    id
+  end
+
+  private
+  def randomize
+    self.sets.delete('')
+    cards = Card.kingdom.where(:set => self.sets).select([:id, :cost])
+    if self.cost_option == 'each_plus6'
+      (2..5).each do |cost|
+        card = cards.find_all {|c| c.cost == cost }.sample
+        self.card_ids << card.id if card
+      end
+      cards.delete_if {|card| self.card_ids.include?(card.id) }
+      self.card_ids.concat(cards.sample(10 - self.card_ids.size).map(&:id))
+    else # cost_option == 'random'
+      self.card_ids = cards.pluck(:id).sample(10)
+    end
+    self.card_ids.sort!
   end
 end

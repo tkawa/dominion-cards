@@ -17,19 +17,15 @@ class PicksController < ApplicationController
   # POST /picks
   # POST /picks.json
   def create
-    sets = params[:sets].select{|k,v| v.to_i == 1 }.keys
-    cards = Card.kingdom.where(:set => sets).select([:id, :cost])
-    card_ids = []
-    if params[:costs] == 'each_plus6'
-      (2..5).each do |cost|
-        card = cards.find_all {|c| c.cost == cost }.sample
-        card_ids << card.id if card
+    @pick = Pick.new(params[:pick])
+
+    if @pick.do_pick
+      redirect_to pick_url(@pick), notice: 'Pick was successfully created.', status: :see_other # 303
+    else
+      respond_to do |format|
+        format.html { redirect_to root_url, alert: 'error' }
+        format.json { render json: @pick.errors, status: :unprocessable_entity }
       end
-      cards.delete_if {|card| card_ids.include?(card.id) }
-      card_ids.concat(cards.sample(10 - card_ids.size).map(&:id))
-    else # random
-      card_ids = cards.pluck(:id).sample(10)
     end
-    redirect_to pick_url(id: Pick.card_ids_to_pick_id(card_ids.sort)), status: :see_other # 303
   end
 end
