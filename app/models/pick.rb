@@ -5,8 +5,11 @@ class Pick
   attribute :id
   attribute :card_ids, default: []
   attribute :sets, default: ['base']
-  attribute :cost_option, default: :each_plus6
-  enumerize :cost_option, :in => [:each_plus6, :random]
+  attribute :options, default: []
+  OPTIONS = [:no_potion, :no_prize]
+  OPTIONS_FOR_SELECT = OPTIONS.map{|o| [I18n.t(o, scope: 'enumerize.pick.options'), o] }
+  attribute :cost_option
+  enumerize :cost_option, :in => [:each_plus6, :random], default: :each_plus6
 
   @@pascals = [[1]]
   1.upto(180) do |i|
@@ -48,6 +51,14 @@ class Pick
   def randomize
     self.sets.delete('')
     cards = Card.kingdom.where(:set => self.sets).select([:id, :cost])
+
+    if self.options.include?('no_potion')
+      cards = cards.where(:potion => nil)
+    end
+    if self.options.include?('no_prize')
+      cards = cards.where('name != "Tournament"')
+    end
+
     if self.cost_option == 'each_plus6'
       (2..5).each do |cost|
         card = cards.find_all {|c| c.cost == cost }.sample

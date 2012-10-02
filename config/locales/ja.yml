@@ -217,7 +217,7 @@ ja:
         description: 詳細
   enumerize:
     card:
-      set:
+      set: &card_set
         base: 基本
         intrigue: 陰謀
         seaside: 海辺
@@ -227,12 +227,14 @@ ja:
         hinterlands: 異郷
         promo: プロモ
     pick:
+      sets:
+        <<: *card_set
+      options:
+        no_potion: ポーションなし
+        no_prize: 褒賞（馬上槍試合）なし
       cost_option: &costs
         each_plus6: 2〜5から1枚ずつ+6枚
         random: 完全ランダム
-  costs_option:
-    each_plus6: 2〜5から1枚ずつ+6枚
-    random: 完全ランダム
   simple_form:
     labels:
       pick:

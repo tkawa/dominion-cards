@@ -23,7 +23,7 @@ class PicksController < ApplicationController
       redirect_to pick_url(@pick), notice: 'Pick was successfully created.', status: :see_other # 303
     else
       respond_to do |format|
-        format.html { redirect_to root_url, alert: 'error' }
+        format.html { render 'home/index', alert: 'error', status: :unprocessable_entity }
         format.json { render json: @pick.errors, status: :unprocessable_entity }
       end
     end

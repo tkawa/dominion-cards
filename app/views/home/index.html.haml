@@ -3,6 +3,7 @@
 .well
   = simple_form_for @pick do |f|
     = f.input :sets, as: :check_boxes, collection: Card.set.options, label_method: :first, value_method: :last, label_html: { class: 'sets' }
-    = f.input :cost_option, as: :radio_buttons, collection: Pick.cost_option.options, label_method: :first, value_method: :last, label_html: { class: 'cost_option' }
+    = f.input :options, as: :check_boxes, collection: Pick::OPTIONS_FOR_SELECT, label_method: :first, value_method: :last, label_html: { class: 'options' }
+    = f.input :cost_option, as: :radio_buttons
     %p ※ 繁栄には2コストのカードはありません
     = f.submit 'Create', class: 'btn'
