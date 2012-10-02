@@ -22,8 +22,10 @@ class PicksController < ApplicationController
     if @pick.do_pick
       redirect_to pick_url(@pick), notice: 'Pick was successfully created.', status: :see_other # 303
     else
+      pp @pick.errors
+      flash[:alert] = @pick.errors.full_messages.join("\n")
       respond_to do |format|
-        format.html { render 'home/index', alert: 'error', status: :unprocessable_entity }
+        format.html { render 'home/index', status: :unprocessable_entity }
         format.json { render json: @pick.errors, status: :unprocessable_entity }
       end
     end

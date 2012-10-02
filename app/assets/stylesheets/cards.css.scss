@@ -10,7 +10,15 @@ label.control-label {
     line-height: 30px;
   }
 }
-select.counts {
+fieldset.cost_details {
+  padding: 10px 0 0 20px;
+  border: 1px solid #E5E5E5;
+  @include border-radius(6px);
+}
+label.pick_counts {
+  display: inline;
+}
+select.pick_counts {
   width: 100px;
 }
 input[type="submit"] {

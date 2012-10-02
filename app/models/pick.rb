@@ -44,7 +44,13 @@ class Pick
   def do_pick
     return false unless valid?
     randomize
-    self.id = Pick.card_ids_to_pick_id(card_ids)
+    begin
+      self.id = Pick.card_ids_to_pick_id(card_ids)
+    rescue ArgumentError
+      e = 'picked_cards_are_too_few'
+      errors.add :base, I18n.t(e, scope: 'errors.messages', default: e.humanize)
+      return false
+    end
   end
 
   def to_param
