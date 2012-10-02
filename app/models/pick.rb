@@ -15,6 +15,7 @@ class Pick
   COUNTS_FOR_SELECT = COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
                                                       : [I18n.t(n, scope: 'enumerize.pick.details'), n] }
 
+  # ready for Pascal's triangle table
   @@pascals = [[1]]
   1.upto(180) do |i|
     @@pascals << 1.upto(i-1).map {|j| @@pascals[i-1][j-1] + @@pascals[i-1][j] }.unshift(1).push(1)
@@ -41,16 +42,18 @@ class Pick
     card_ids.sort
   end
 
-  def do_pick
-    return false unless valid?
+  def do_pick!
+    raise ActiveRecord::RecordInvalid.new(self) unless valid?
     randomize
-    begin
-      self.id = Pick.card_ids_to_pick_id(card_ids)
-    rescue ArgumentError
-      e = 'picked_cards_are_too_few'
-      errors.add :base, I18n.t(e, scope: 'errors.messages', default: e.humanize)
-      return false
-    end
+    self.id = Pick.card_ids_to_pick_id(card_ids)
+  rescue ArgumentError
+    e = 'picked_cards_are_too_few'
+    errors.add :base, I18n.t(e, scope: 'errors.messages', default: e.humanize)
+    raise ConditionInvalid.new(self)
+  end
+
+  def do_pick
+    do_pick! rescue false
   end
 
   def to_param
@@ -89,4 +92,7 @@ class Pick
     end
     self.card_ids.sort!
   end
+end
+
+class ConditionInvalid < ActiveRecord::RecordInvalid
 end
