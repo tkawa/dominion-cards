@@ -232,11 +232,11 @@ ja:
       options:
         no_potion: ポーションなし
         no_prize: 褒賞（馬上槍試合）なし
-      cost_option: &costs
+      cost_condition:
         each_plus6: 2〜5から1枚ずつ+6枚
         random: 完全ランダム
   simple_form:
     labels:
       pick:
         sets: 'セット選択:'
-        cost_option: 'コストオプション:'
+        cost_condition: 'コスト条件:'

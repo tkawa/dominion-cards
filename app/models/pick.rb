@@ -8,8 +8,8 @@ class Pick
   attribute :options, default: []
   OPTIONS = [:no_potion, :no_prize]
   OPTIONS_FOR_SELECT = OPTIONS.map{|o| [I18n.t(o, scope: 'enumerize.pick.options'), o] }
-  attribute :cost_option
-  enumerize :cost_option, :in => [:each_plus6, :random], default: :each_plus6
+  attribute :cost_condition
+  enumerize :cost_condition, :in => [:each_plus6, :random], default: :each_plus6
 
   @@pascals = [[1]]
   1.upto(180) do |i|
@@ -59,14 +59,14 @@ class Pick
       cards = cards.where('name != "Tournament"')
     end
 
-    if self.cost_option == 'each_plus6'
+    if self.cost_condition == 'each_plus6'
       (2..5).each do |cost|
         card = cards.find_all {|c| c.cost == cost }.sample
         self.card_ids << card.id if card
       end
       cards.delete_if {|card| self.card_ids.include?(card.id) }
       self.card_ids.concat(cards.sample(10 - self.card_ids.size).map(&:id))
-    else # cost_option == 'random'
+    else # cost_condition == 'random'
       self.card_ids = cards.pluck(:id).sample(10)
     end
     self.card_ids.sort!
