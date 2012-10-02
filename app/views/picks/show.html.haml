@@ -13,8 +13,9 @@
         = link_to "##{card.canonical_name}" do
           %strong>= card.name_j
         %span.set= card.set.text
-  .tweet
-    = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button", data: {lang: 'ja', count: 'none', size: 'large'}
+  - if @cards.size == 10
+    .tweet
+      = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button", data: {lang: 'ja', count: 'none', size: 'large'}
 - @cards.each do |card|
   %section.card{id: card.canonical_name}
     %header

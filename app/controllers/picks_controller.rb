@@ -19,10 +19,12 @@ class PicksController < ApplicationController
   def create
     @pick = Pick.new(params[:pick])
 
-    if @pick.do_pick
-      redirect_to pick_url(@pick), notice: 'Pick was successfully created.', status: :see_other # 303
-    else
-      pp @pick.errors
+    begin
+      @pick.do_pick!
+      redirect_to pick_url(@pick), status: :see_other # 303
+    rescue ConditionInvalid
+      redirect_to card_url(id: @pick.card_ids.join(',')), alert: @pick.errors.full_messages.join("\n"), status: :see_other # 303
+    rescue ActiveRecord::RecordInvalid
       flash[:alert] = @pick.errors.full_messages.join("\n")
       respond_to do |format|
         format.html { render 'home/index', status: :unprocessable_entity }
