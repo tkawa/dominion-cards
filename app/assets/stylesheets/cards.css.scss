@@ -10,7 +10,7 @@ label.control-label {
     line-height: 30px;
   }
 }
-fieldset.cost_details {
+fieldset#cost_details {
   padding: 10px 0 0 20px;
   border: 1px solid #E5E5E5;
   @include border-radius(6px);
