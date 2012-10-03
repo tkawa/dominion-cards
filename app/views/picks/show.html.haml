@@ -1,20 +1,20 @@
 .page-header(style="display:none;")
   %h1 Card pick
 
-.well
+.picks.well
   %p.images
     - @cards.each do |card|
       = link_to image_tag(card.image_url, alt: card.name), "##{card.canonical_name}"
 
-  %ul.picks
+  %ul
     - @cards.each do |card|
       %li
         %span.coin= card.cost_p
-        = link_to "##{card.canonical_name}" do
-          %strong>= card.name_j
+        %span.name
+          = link_to card.name_j, "##{card.canonical_name}"
         %span.set= card.set.text
   - if @cards.size == 10
-    .tweet
+    .tweet_button
       = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button", data: {lang: 'ja', count: 'none', size: 'large'}
 - @cards.each do |card|
   %section.card{id: card.canonical_name}

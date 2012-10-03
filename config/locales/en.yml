@@ -137,6 +137,7 @@ en:
       create: Create %{model}
       submit: Save %{model}
       update: Update %{model}
+      pick_cards: Pick cards
   number:
     currency:
       format:
@@ -206,3 +207,24 @@ en:
     attributes:
       card:
         name_j: Name (ja)
+  enumerize:
+    pick:
+      options:
+        no_potion: No potion
+        no_prize: No prize
+      cost_condition:
+        each_plus6: '2-5cost each >= 1'
+      details:
+        auto: Auto
+        number: '%{count}'
+  simple_form:
+    labels:
+      pick:
+        counts:
+          '2': '2cost:'
+          '3': '3cost:'
+          '4': '4cost:'
+          '5': '5cost:'
+          '6': '6cost:'
+  dominion_cards: Dominion Cards
+  dominion_cards_title: Dominion Cards

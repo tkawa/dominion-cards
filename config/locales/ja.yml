@@ -132,6 +132,7 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+      pick_cards: カードを選ぶ
   number:
     currency:
       format:
@@ -234,7 +235,7 @@ ja:
         no_potion: ポーションなし
         no_prize: 褒賞（馬上槍試合）なし
       cost_condition:
-        each_plus6: 2〜5から1枚ずつ+6枚
+        each_plus6: 2〜5を1枚ずつ以上
         random: 完全ランダム
         manual: 枚数を指定する
       details:
@@ -252,3 +253,7 @@ ja:
           '4': '4コスト:'
           '5': '5コスト:'
           '6': '6コスト:'
+  dominion_cards: ドミニオンカードピッカー
+  dominion_cards_title: 'Dominion Cards [ドミニオンカードピッカー]'
+  card_list: カードリスト
+  random_picker: ランダムピッカー

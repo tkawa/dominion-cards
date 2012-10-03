@@ -1,16 +1,20 @@
 @import "bootstrap";
 body { padding-top: 60px; }
 @import "bootstrap-responsive";
-//@media (max-width: 767px) {
-//  body {
-//    padding-left: 10px;
-//    padding-right: 10px;
-//  }
-//  .navbar .brand {
-//    margin-left: 5px;
-//  }
-//  .navbar .btn-navbar {
-//    margin-right: 10px;
-//  }
-//}
+.navbar {
+  margin-bottom: 2px;
+}
+input.ios[type='checkbox'] {
+  -webkit-appearance:none;
+  display: block;
+  width: 77px;
+  height: 27px;
+  background: url(toggle.png) no-repeat -51px 0;
+  border-radius: 30px;
+  -webkit-background-size: 128px 27px;
+  -webkit-transition: 0.3s;
+}
+input.ios[type='checkbox']:checked {
+  background-position: 0 0;
+}
 @import "cards";

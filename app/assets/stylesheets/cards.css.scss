@@ -1,19 +1,47 @@
 h1 {
-  font-size: 24px;
+  font-size: 22px;
+}
+#select {
+  @extend .well;
+  padding-top: 10px;
+}
+form#new_pick {
+  margin: 0;
 }
 label.control-label {
   &.sets, &.options, &.cost_condition {
     @extend legend;
     font-size: 14px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     line-height: 30px;
   }
 }
+label.checkbox, label.radio {
+  min-height: 27px;
+  padding: 5px 10px 5px 1em;
+  margin: 0 2px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid #DDD;
+  cursor: pointer;
+}
+input.check_boxes[type='checkbox'] {
+  @extend input.ios[type='checkbox'];
+  float: right;
+  margin: 0;
+}
 fieldset#cost_details {
+  position: relative;
+  top: -11px;
   padding: 10px 0 0 20px;
-  border: 1px solid #E5E5E5;
-  @include border-radius(6px);
+  //border: 1px solid #E5E5E5;
+  border-top: 1px solid white;
+  border-bottom: 1px solid #DDD;
+  @include border-radius(4px);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+input.radio_buttons[type='radio'] {
+  float: right;
 }
 label.pick_counts {
   display: inline;
@@ -26,12 +54,19 @@ input[type="submit"] {
   @extend .btn-large;
   @extend .btn-block;
   @extend .btn-primary;
+  margin-top: 20px;
 }
 
-ul.picks {
-  @extend .unstyled;
-  margin-left: 15px;
-  margin-bottom: 0;
+.picks {
+  margin-top: 12px;
+  ul {
+    @extend .unstyled;
+    margin: 10px 15px;
+  }
+}
+.tweet_button {
+  text-align: right;
+  height: 28px;
 }
 section.card {
   margin-bottom: 20px;
@@ -53,6 +88,10 @@ h2.name {
 span.coin {
   @extend .badge;
   @extend .badge-warning;
+}
+span.name {
+  font-weight: bold;
+  margin: 0 2px;
 }
 span.set {
   @extend .label;

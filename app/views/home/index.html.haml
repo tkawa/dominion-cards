@@ -1,6 +1,6 @@
-%h1 ドミニオンカードリスト & ランダムピッカー
+%h1= t('dominion_cards')
 
-.well
+#select
   = simple_form_for @pick do |f|
     = f.input :sets, as: :check_boxes, collection: Card.set.options, label_html: { class: 'sets' }
     = f.input :options, as: :check_boxes, collection: Pick::OPTIONS_FOR_SELECT, label_html: { class: 'options' }
@@ -9,5 +9,4 @@
       = f.simple_fields_for :counts, OpenStruct.new(@pick.counts) do |field|
         - (2..6).each do |cost|
           = field.input cost, collection: Pick::COUNTS_FOR_SELECT, prompt: nil, wrapper: :default, required: false, input_html: { class: 'pick_counts' }, label_html: { class: 'pick_counts' }
-    %p ※ 繁栄には2コストのカードはありません
-    = f.submit 'Create'
+    = f.submit t('helpers.submit.pick_cards')
