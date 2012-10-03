@@ -69,7 +69,7 @@ class Pick
       cards = cards.where(:potion => nil)
     end
     if self.options.include?('no_prize')
-      cards = cards.where('name != "Tournament"')
+      cards = cards.where("name <> 'Tournament'")
     end
 
     if self.cost_condition == 'each_plus6'
