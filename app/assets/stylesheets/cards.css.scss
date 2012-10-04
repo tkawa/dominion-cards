@@ -1,6 +1,12 @@
 h1 {
   font-size: 22px;
 }
+.alert {
+  margin: 10px 0;
+  p {
+    margin: 0;
+  }
+}
 #select {
   @extend .well;
   padding-top: 10px;
@@ -73,6 +79,12 @@ input[type="submit"] {
 .tweet_button {
   text-align: right;
   height: 28px;
+  .pick_id {
+    margin: 0;
+    line-height: 5px;
+    font-size: 11px;
+    font-style: italic;
+  }
 }
 section.card {
   margin-bottom: 20px;

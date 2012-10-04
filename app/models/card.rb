@@ -14,4 +14,7 @@ class Card < ActiveRecord::Base
   def image_url(size = 'small-ja')
     "http://dominion-cards.s3-ap-northeast-1.amazonaws.com/#{size}/#{canonical_name.camelize.gsub(/\s/, '')}.png"
   end
+  def kingdom?
+    division == '王国'
+  end
 end

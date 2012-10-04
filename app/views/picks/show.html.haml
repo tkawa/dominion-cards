@@ -17,6 +17,7 @@
     .tweet_button
       = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button",
         data: {lang: 'ja', count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@cards.map(&:name_j).join(' ')}」を選びました！"}
+      %p.pick_id ##{params[:id]}
 - @cards.each do |card|
   %section.card{id: card.canonical_name}
     %header
