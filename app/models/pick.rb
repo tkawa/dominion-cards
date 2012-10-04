@@ -8,7 +8,7 @@ class Pick
   attribute :sets, default: ['base']
   attribute :options, default: []
   OPTIONS = [:no_potion, :no_prize, :more_attack, :more_reaction]
-  OPTIONS_FOR_SELECT = OPTIONS.map{|o| [I18n.t(o, scope: 'enumerize.pick.options'), o] }
+  OPTIONS_FOR_SELECT = OPTIONS.map{|o| [I18n.t(o, scope: 'enumerize.pick.options', default: o.to_s.humanize), o] }
   attribute :cost_condition
   enumerize :cost_condition, :in => [:each_plus6, :random, :manual], default: :each_plus6
   attribute :kind_condition
