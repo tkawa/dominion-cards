@@ -238,21 +238,27 @@ ja:
         each_plus6: 2〜5を1枚ずつ以上
         random: 完全ランダム
         manual: 枚数を指定する
+      kind_condition:
+        random: ランダム
+        manual: 枚数を指定する
       details:
         auto: 自動
         number: '%{count} 枚'
   simple_form:
     labels:
       pick:
-        sets: 'セット選択:'
-        options: 'オプション:'
-        cost_condition: 'コスト条件:'
+        sets: セット選択
+        options: オプション
+        cost_condition: コスト条件
+        kind_condition: 種類条件
         counts:
-          '2': '2コスト:'
-          '3': '3コスト:'
-          '4': '4コスト:'
-          '5': '5コスト:'
-          '6': '6コスト:'
+          '2': 2コスト
+          '3': 3コスト
+          '4': 4コスト
+          '5': 5コスト
+          '6': 6コスト
+          attack: アタック
+          reaction: リアクション
   dominion_cards: ドミニオンカードピッカー
   dominion_cards_title: 'Dominion Cards [ドミニオンカードピッカー]'
   card_list: カードリスト

@@ -15,10 +15,17 @@ label.control-label {
     font-weight: bold;
     margin-bottom: 0;
     line-height: 30px;
+    &:after {
+      content: ':';
+    }
+  }
+  &.pick_counts:after {
+    content: ': ';
   }
 }
 label.checkbox, label.radio {
   min-height: 27px;
+  line-height: 27px;
   padding: 5px 10px 5px 1em;
   margin: 0 2px;
   border-top: 1px solid white;
@@ -30,11 +37,10 @@ input.check_boxes[type='checkbox'] {
   float: right;
   margin: 0;
 }
-fieldset#cost_details {
+fieldset.details {
   position: relative;
   top: -11px;
   padding: 10px 0 0 20px;
-  //border: 1px solid #E5E5E5;
   border-top: 1px solid white;
   border-bottom: 1px solid #DDD;
   @include border-radius(4px);
