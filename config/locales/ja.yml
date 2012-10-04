@@ -234,6 +234,8 @@ ja:
       options:
         no_potion: ポーションなし
         no_prize: 褒賞（馬上槍試合）なし
+        more_attack: アタック多め
+        more_reaction: リアクション多め
       cost_condition:
         each_plus6: 2〜5を1枚ずつ以上
         random: 完全ランダム

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Pick
   include ActiveAttr::Model
   include Enumerize
@@ -6,10 +7,12 @@ class Pick
   attribute :card_ids, default: []
   attribute :sets, default: ['base']
   attribute :options, default: []
-  OPTIONS = [:no_potion, :no_prize]
+  OPTIONS = [:no_potion, :no_prize, :more_attack, :more_reaction]
   OPTIONS_FOR_SELECT = OPTIONS.map{|o| [I18n.t(o, scope: 'enumerize.pick.options'), o] }
   attribute :cost_condition
   enumerize :cost_condition, :in => [:each_plus6, :random, :manual], default: :each_plus6
+  attribute :kind_condition
+  enumerize :kind_condition, :in => [:random, :manual], default: :random
   attribute :counts
   COUNTS = [:auto, 0, 1, 2, 3, 4, 5, 6]
   COUNTS_FOR_SELECT = COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
@@ -63,7 +66,7 @@ class Pick
   private
   def randomize
     self.sets.delete('')
-    cards = Card.kingdom.where(:set => self.sets).select([:id, :cost])
+    cards = Card.kingdom.where(:set => self.sets).select([:id, :cost, :kind])
 
     if self.options.include?('no_potion')
       cards = cards.where(:potion => nil)
@@ -72,25 +75,45 @@ class Pick
       cards = cards.where("name <> 'Tournament'")
     end
 
+    cards = cards.all
     if self.cost_condition == 'each_plus6'
       (2..5).each do |cost|
-        card = cards.find_all {|c| c.cost == cost }.sample
-        self.card_ids << card.id if card
+        pots = cards.find_all {|c| c.cost == cost }
+        self.card_ids.concat(sample_card_ids(pots, 1)) unless pots.empty?
       end
-      cards.delete_if {|card| self.card_ids.include?(card.id) }
-      self.card_ids.concat(cards.sample(10 - self.card_ids.size).map(&:id))
+      cards.delete_if {|c| self.card_ids.include?(c.id) }
+      self.card_ids.concat(sample_card_ids(cards, 10 - self.card_ids.size))
     elsif self.cost_condition == 'manual'
       self.counts.each do |cost, count|
         next if count == 'auto'
-        card = cards.find_all {|c| c.cost == cost.to_i }.sample(count.to_i)
-        self.card_ids.concat(card.map(&:id))
+        pots = cards.find_all {|c| c.cost == cost.to_i }
+        self.card_ids.concat(sample_card_ids(pots, count.to_i))
         cards.delete_if {|c| c.cost == cost.to_i }
       end
-      self.card_ids.concat(cards.sample(10 - self.card_ids.size).map(&:id))
+      self.card_ids.concat(sample_card_ids(cards, 10 - self.card_ids.size))
     else # cost_condition == 'random'
-      self.card_ids = cards.pluck(:id).sample(10)
+      self.card_ids = sample_card_ids(cards, 10)
     end
     self.card_ids.sort!
+  end
+
+  def sample_card_ids(cards, count)
+    cards = cards.dup
+    if cards.size <= count
+      cards
+    else
+      # add 2x weight
+      if self.options.include?('more_attack')
+        cards.concat(cards.find_all {|c| c.kind.match('アタック') })
+      end
+      if self.options.include?('more_reaction')
+        cards.concat(cards.find_all {|c| c.kind.match('リアクション') })
+      end
+      begin
+        samples = cards.sample(count)
+      end while samples.uniq!(&:id)
+      samples
+    end.map(&:id)
   end
 end
 

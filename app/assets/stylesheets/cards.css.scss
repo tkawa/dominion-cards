@@ -9,7 +9,7 @@ form#new_pick {
   margin: 0;
 }
 label.control-label {
-  &.sets, &.options, &.cost_condition {
+  &.sets, &.options, &.cost_condition, &.kind_condition {
     @extend legend;
     font-size: 14px;
     font-weight: bold;
