@@ -231,6 +231,12 @@ ja:
     pick:
       sets:
         <<: *card_set
+      promos:
+        black-market: 闇市場
+        envoy: 公使
+        stash: へそくり
+        walled-village: 囲郭村
+        governor: 総督
       options:
         no_potion: ポーションなし
         no_prize: 褒賞（馬上槍試合）なし
@@ -250,6 +256,7 @@ ja:
     labels:
       pick:
         sets: セット選択
+        promos: プロモ
         options: オプション
         cost_condition: コスト条件
         kind_condition: 種類条件

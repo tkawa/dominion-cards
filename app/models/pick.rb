@@ -6,9 +6,9 @@ class Pick
   attribute :id
   attribute :card_ids, default: []
   attribute :sets, default: ['base']
+  attribute :promos, default: Card.promo_canonical_names
   attribute :options, default: []
   OPTIONS = [:no_potion, :no_prize, :more_attack, :more_reaction]
-  OPTIONS_FOR_SELECT = OPTIONS.map{|o| [I18n.t(o, scope: 'enumerize.pick.options', default: o.to_s.humanize), o] }
   attribute :cost_condition
   enumerize :cost_condition, :in => [:each_plus6, :random, :manual], default: :each_plus6
   attribute :kind_condition
@@ -17,6 +17,10 @@ class Pick
   COUNTS = [:auto, 0, 1, 2, 3, 4, 5, 6]
   COUNTS_FOR_SELECT = COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
                                                       : [I18n.t(n, scope: 'enumerize.pick.details'), n] }
+
+  def self.for_select(options, scope)
+    options.map{|o| [I18n.t(o, scope: ['enumerize.pick', scope], default: o.to_s.underscore.humanize), o] }
+  end
 
   # ready for Pascal's triangle table
   @@pascals = [[1]]
@@ -75,11 +79,15 @@ class Pick
     self.sets.delete('')
     cards = Card.kingdom.where(:set => self.sets).select([:id, :cost, :kind])
 
+    exclude_promos = Card.promo_canonical_names - self.promos
+    if self.sets.include?('promo') && exclude_promos.present?
+      cards = cards.where('canonical_name NOT IN (?)', exclude_promos)
+    end
     if self.options.include?('no_potion')
       cards = cards.where(:potion => nil)
     end
     if self.options.include?('no_prize')
-      cards = cards.where("name <> 'Tournament'")
+      cards = cards.where('canonical_name <> ?', 'tournament')
     end
 
     cards = cards.all

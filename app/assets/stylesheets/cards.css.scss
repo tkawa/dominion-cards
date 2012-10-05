@@ -28,6 +28,9 @@ label.control-label {
   &.pick_counts:after {
     content: ': ';
   }
+  &.promos {
+    display: none;
+  }
 }
 label.checkbox, label.radio {
   min-height: 27px;

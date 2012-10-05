@@ -3,7 +3,9 @@
 #select
   = simple_form_for @pick do |f|
     = f.input :sets, as: :check_boxes, collection: Card.set.options, label_html: { class: 'sets' }
-    = f.input :options, as: :check_boxes, collection: Pick::OPTIONS_FOR_SELECT, label_html: { class: 'options' }
+    %fieldset#promo_details.details
+      = f.input :promos, as: :check_boxes, collection: Pick.for_select(Card.promo_canonical_names, :promos), label_html: { class: 'promos' }
+    = f.input :options, as: :check_boxes, collection: Pick.for_select(Pick::OPTIONS, :options), label_html: { class: 'options' }
     = f.input :cost_condition, as: :radio_buttons, label_html: { class: 'cost_condition' }
     %fieldset#cost_details.details
       = f.simple_fields_for :counts, OpenStruct.new(@pick.counts) do |field|

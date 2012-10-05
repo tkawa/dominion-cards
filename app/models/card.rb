@@ -5,7 +5,11 @@ class Card < ActiveRecord::Base
 
   scope :kingdom, -> { where(:division => '王国') }
   scope :prize, -> { where(:division => '褒賞') }
+  scope :promos, -> { where(:set => 'promo') }
 
+  def self.promo_canonical_names
+    promos.pluck(:canonical_name)
+  end
   def to_param
     canonical_name
   end
