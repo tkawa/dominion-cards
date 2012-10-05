@@ -11,18 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120929095801) do
+ActiveRecord::Schema.define(:version => 20121005073244) do
 
   create_table "cards", :force => true do |t|
-    t.string  "name_j",      :null => false
+    t.string  "name_j",         :null => false
     t.text    "description"
-    t.string  "kana",        :null => false
-    t.string  "name",        :null => false
-    t.string  "set",         :null => false
+    t.string  "kana",           :null => false
+    t.string  "name",           :null => false
+    t.string  "set",            :null => false
     t.integer "cost"
     t.integer "potion"
-    t.string  "division",    :null => false
-    t.string  "kind",        :null => false
+    t.string  "division",       :null => false
+    t.string  "kind",           :null => false
     t.integer "treasure"
     t.integer "victory"
     t.integer "cards"
@@ -30,8 +30,10 @@ ActiveRecord::Schema.define(:version => 20120929095801) do
     t.integer "buys"
     t.integer "coins"
     t.integer "vp_tokens"
+    t.string  "canonical_name", :null => false
   end
 
+  add_index "cards", ["canonical_name"], :name => "index_cards_on_canonical_name", :unique => true
   add_index "cards", ["name"], :name => "index_cards_on_name", :unique => true
   add_index "cards", ["name_j"], :name => "index_cards_on_name_j", :unique => true
 

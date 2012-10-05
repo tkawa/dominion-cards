@@ -5,8 +5,8 @@ class Card < ActiveRecord::Base
 
   scope :kingdom, -> { where(:division => '王国') }
 
-  def canonical_name
-    name.tr("'", "").parameterize
+  def to_param
+    canonical_name
   end
   def cost_p
     "#{cost}#{'p' * potion.to_i}"
