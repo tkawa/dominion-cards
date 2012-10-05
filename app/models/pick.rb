@@ -45,8 +45,15 @@ class Pick
     card_ids.sort
   end
 
+  def self.find_cards!(id)
+    card_ids = pick_id_to_card_ids(id.to_i)
+    cards = Card.where(:id => card_ids).order('COALESCE(cost, 0), COALESCE(potion, 0)')
+    raise ::ActiveRecord::RecordNotFound, "Couldn't find Pick with ID=#{id}" if cards.any? {|c| !c.kingdom? }
+    cards
+  end
+
   def do_pick!
-    raise ActiveRecord::RecordInvalid.new(self) unless valid?
+    raise ::ActiveRecord::RecordInvalid.new(self) unless valid?
     randomize
     self.id = Pick.card_ids_to_pick_id(card_ids)
   rescue ArgumentError
