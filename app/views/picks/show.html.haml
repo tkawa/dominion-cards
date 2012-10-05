@@ -1,32 +1,38 @@
 .page-header(style="display:none;")
   %h1 Card pick
 
+- @appended_cards ||= []
 .picks.well
-  %p.images
-    - @cards.each do |card|
-      = link_to image_tag(card.image_url, alt: card.name), "##{card.canonical_name}"
+  - [@cards, @appended_cards].each do |cards|
+    %p.images
+      - cards.each do |card|
+        = link_to image_tag(card.image_url, alt: card.name), "##{card.canonical_name}"
 
-  %ul
-    - @cards.each do |card|
-      %li
-        %span.coin= card.cost_p
-        %span.name
-          = link_to card.name_j, "##{card.canonical_name}"
-        %span.set= card.set.text
+  - [@cards, @appended_cards].each do |cards|
+    %ul
+      - cards.each do |card|
+        %li
+          %span.coin= card.cost_p
+          %span.name
+            = link_to card.name_j, "##{card.canonical_name}"
+          %span.set= card.set.text
+
   - if @cards.size == 10
     .tweet_button
       = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button",
         data: {lang: 'ja', count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@cards.map(&:name_j).join(' ')}」を選びました！"}
       %p.pick_id ##{params[:id]}
-- @cards.each do |card|
-  %section.card{id: card.canonical_name}
-    %header
-      %h2.name= card.name_j
-      %span.coin= card.cost_p
-      %span.set= card.set.text
-      %span.kind= card.kind
-    .description
-      = card.description.html_safe
+
+- [@cards, @appended_cards].each do |cards|
+  - cards.each do |card|
+    %section.card{id: card.canonical_name}
+      %header
+        %h2.name= card.name_j
+        %span.coin= card.cost_p
+        %span.set= card.set.text
+        %span.kind= card.kind
+      .description
+        = card.description.html_safe
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), root_path, :class => 'btn'

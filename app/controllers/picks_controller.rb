@@ -12,6 +12,7 @@ class PicksController < ApplicationController
     card_ids = Pick.pick_id_to_card_ids(params[:id].to_i)
     @cards = Card.where(:id => card_ids).order('COALESCE(cost, 0), COALESCE(potion, 0)')
     raise ActiveRecord::RecordNotFound.new if @cards.any? {|c| !c.kingdom? }
+    @appended_cards = Card.prize.order('COALESCE(cost, 0), COALESCE(potion, 0)') if @cards.any? {|c| c.canonical_name == 'tournament' }
 
     respond_to do |format|
       format.html # show.html.haml

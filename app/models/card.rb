@@ -4,6 +4,7 @@ class Card < ActiveRecord::Base
   enumerize :set, :in => [:base, :intrigue, :seaside, :alchemy, :prosperity, :cornucopia, :hinterlands, :dark_ages, :promo]
 
   scope :kingdom, -> { where(:division => '王国') }
+  scope :prize, -> { where(:division => '褒賞') }
 
   def to_param
     canonical_name
