@@ -11,7 +11,8 @@ class CardsController < ApplicationController
   end
 
   def show
-    if params[:id].match(/\w+,\w+/)
+    case params[:id]
+    when /\w+,\w+/
       # GET /cards/1,2,3,4,5,6,7,8,9,10
       # GET /cards/1,2,3,4,5,6,7,8,9,10.json
       card_ids = params[:id].split(',')
@@ -24,14 +25,15 @@ class CardsController < ApplicationController
           format.json { render json: @cards }
         end
       end
-    elsif params[:id].match(/\A\d+\Z/)
+    when /\A\d+\Z/
       # GET /cards/1
       # GET /cards/1.json
       @card = Card.find(params[:id])
       redirect_to @card, status: :moved_permanently # 301
     else
-      @card = Card.find_by_canonical_name(params[:id])
-
+      # GET /cards/name
+      # GET /cards/name.json
+      @card = Card.find_by_canonical_name!(params[:id])
       respond_to do |format|
         format.html # show.html.haml
         format.json { render json: @card }
