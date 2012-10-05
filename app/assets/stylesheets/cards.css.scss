@@ -114,3 +114,10 @@ span.name {
 span.set {
   @extend .label;
 }
+
+dl.spec {
+  @extend .dl-horizontal;
+  dt:after {
+    content: ':';
+  }
+}

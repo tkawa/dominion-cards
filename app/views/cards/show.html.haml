@@ -1,66 +1,53 @@
-- model_class = Card
 .page-header
   %h1= @card.name_j
+  = image_tag(@card.image_url, alt: @card.name)
 
-%p
-  %strong= model_class.human_attribute_name(:kana) + ':'
-  %br
-  = @card.kana
-%p
-  %strong= model_class.human_attribute_name(:name) + ':'
-  %br
-  = @card.name
-%p
-  %strong= model_class.human_attribute_name(:set) + ':'
-  %br
-  %span.set= @card.set.text
-%p
-  %strong= model_class.human_attribute_name(:cost) + ':'
-  %br
-  %span.coin= @card.cost
-%p
-  %strong= model_class.human_attribute_name(:potion) + ':'
-  %br
-  = @card.potion
-%p
-  %strong= model_class.human_attribute_name(:division) + ':'
-  %br
-  = @card.division
-%p
-  %strong= model_class.human_attribute_name(:kind) + ':'
-  %br
-  = @card.kind
-%p
-  %strong= model_class.human_attribute_name(:treasure) + ':'
-  %br
-  = @card.treasure
-%p
-  %strong= model_class.human_attribute_name(:victory) + ':'
-  %br
-  = @card.victory
-%p
-  %strong= model_class.human_attribute_name(:cards) + ':'
-  %br
-  = @card.cards
-%p
-  %strong= model_class.human_attribute_name(:actions) + ':'
-  %br
-  = @card.actions
-%p
-  %strong= model_class.human_attribute_name(:buys) + ':'
-  %br
-  = @card.buys
-%p
-  %strong= model_class.human_attribute_name(:coins) + ':'
-  %br
-  = @card.coins
-%p
-  %strong= model_class.human_attribute_name(:vp_tokens) + ':'
-  %br
-  = @card.vp_tokens
-%p
-  %strong= model_class.human_attribute_name(:description) + ':'
-  %br
+%dl.spec
+  %dt= Card.human_attribute_name(:kana)
+  %dd= @card.kana
+
+  %dt= Card.human_attribute_name(:name)
+  %dd= @card.name
+
+  %dt= Card.human_attribute_name(:set)
+  %dd
+    %span.set= @card.set.text
+
+  %dt= Card.human_attribute_name(:cost)
+  %dd
+    %span.coin= @card.cost
+
+  %dt= Card.human_attribute_name(:potion)
+  %dd= @card.potion || '-'
+
+  %dt= Card.human_attribute_name(:division)
+  %dd= @card.division || '-'
+
+  %dt= Card.human_attribute_name(:kind)
+  %dd= @card.kind || '-'
+
+  %dt= Card.human_attribute_name(:treasure)
+  %dd= @card.treasure || '-'
+
+  %dt= Card.human_attribute_name(:victory)
+  %dd= @card.victory || '-'
+
+  %dt= Card.human_attribute_name(:cards)
+  %dd= @card.cards || '-'
+
+  %dt= Card.human_attribute_name(:actions)
+  %dd= @card.actions || '-'
+
+  %dt= Card.human_attribute_name(:buys)
+  %dd= @card.buys || '-'
+
+  %dt= Card.human_attribute_name(:coins)
+  %dd= @card.coins || '-'
+
+  %dt= Card.human_attribute_name(:vp_tokens)
+  %dd= @card.vp_tokens || '-'
+
+.description
   = @card.description.html_safe
 
 .form-actions

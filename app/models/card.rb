@@ -6,13 +6,13 @@ class Card < ActiveRecord::Base
   scope :kingdom, -> { where(:division => '王国') }
 
   def canonical_name
-    name.tr("'", "").parameterize.underscore
+    name.tr("'", "").parameterize
   end
   def cost_p
     "#{cost}#{'p' * potion.to_i}"
   end
   def image_url(size = 'small-ja')
-    "http://dominion-cards.s3-ap-northeast-1.amazonaws.com/#{size}/#{canonical_name.camelize.gsub(/\s/, '')}.png"
+    "http://dominion-cards.s3-ap-northeast-1.amazonaws.com/#{size}/#{canonical_name.underscore.camelize.gsub(/\s/, '')}.png"
   end
   def kingdom?
     division == '王国'
