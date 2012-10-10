@@ -64,12 +64,24 @@ label.pick_counts {
 select.pick_counts {
   width: 100px;
 }
-input[type="submit"] {
+input#pick {
   @extend .btn;
   @extend .btn-large;
   @extend .btn-block;
   @extend .btn-primary;
   margin-top: 20px;
+}
+input#repick {
+  @extend .btn;
+  @extend .btn-large;
+  @extend .btn-block;
+  @extend .btn-primary;
+}
+a.back {
+  @extend .btn;
+  @extend .btn-large;
+  @extend .btn-block;
+  margin-top: 10px;
 }
 
 .picks {

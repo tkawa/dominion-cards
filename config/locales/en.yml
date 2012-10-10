@@ -137,7 +137,9 @@ en:
       create: Create %{model}
       submit: Save %{model}
       update: Update %{model}
-      pick_cards: Pick cards
+      pick:
+        create: Pick cards
+        repick: Repick by preceding conditions
   number:
     currency:
       format:

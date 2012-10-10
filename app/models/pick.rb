@@ -7,13 +7,13 @@ class Pick
   attribute :cards
   attribute :appended_cards, default: []
   attribute :card_ids, default: []
-  attribute :sets, default: ['base']
-  attribute :promos, default: Card.promo_canonical_names
+  attribute :sets, default: []
+  attribute :promos, default: []
   attribute :options, default: []
   OPTIONS = [:no_potion, :no_prize, :more_attack, :more_reaction]
   attribute :cost_condition
   enumerize :cost_condition, :in => [:each_plus6, :random, :manual], default: :each_plus6
-  attribute :counts
+  attribute :counts, default: {}
   COUNTS = [:auto, 0, 1, 2, 3, 4, 5, 6]
   COUNTS_FOR_SELECT = COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
                                                       : [I18n.t(n, scope: 'enumerize.pick.details'), n] }
@@ -93,6 +93,12 @@ class Pick
 
   def do_pick
     do_pick! rescue false
+  end
+
+  def write_conditions(params)
+    params.each do |name, value|
+      write_attribute(name, value)
+    end
   end
 
   def to_param

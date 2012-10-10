@@ -132,7 +132,11 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
-      pick_cards: カードを選ぶ
+      pick:
+        create: カードを選ぶ
+        repick: 直前の条件で選び直す
+    links:
+      back: 戻る
   number:
     currency:
       format:
