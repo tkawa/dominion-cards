@@ -1,14 +1,13 @@
 .page-header(style="display:none;")
   %h1 Card pick
 
-- @appended_cards ||= []
 .picks.well
-  - [@cards, @appended_cards].each do |cards|
+  - [@pick.cards, @pick.appended_cards].each do |cards|
     %p.images
       - cards.each do |card|
         = link_to image_tag(card.image_url, alt: card.name), "##{card.canonical_name}"
 
-  - [@cards, @appended_cards].each do |cards|
+  - [@pick.cards, @pick.appended_cards].each do |cards|
     %ul
       - cards.each do |card|
         %li
@@ -17,13 +16,13 @@
             = link_to card.name_j, "##{card.canonical_name}"
           %span.set= card.set.text
 
-  - if @cards.size == 10
+  - if @pick.cards.size == 10
     .tweet_button
       = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button",
-        data: {lang: 'ja', count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@cards.map(&:name_j).join(' ')}」を選びました！"}
-      %p.pick_id ##{params[:id]}
+        data: {lang: 'ja', count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@pick.cards.map(&:name_j).join(' ')}」を選びました！"}
+      %p.pick_id ##{@pick.id}
 
-- [@cards, @appended_cards].each do |cards|
+- [@pick.cards, @pick.appended_cards].each do |cards|
   - cards.each do |card|
     %section.card{id: card.canonical_name}
       %header

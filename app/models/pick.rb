@@ -4,6 +4,8 @@ class Pick
   include Enumerize
 
   attribute :id
+  attribute :cards
+  attribute :appended_cards, default: []
   attribute :card_ids, default: []
   attribute :sets, default: ['base']
   attribute :promos, default: Card.promo_canonical_names
@@ -11,12 +13,11 @@ class Pick
   OPTIONS = [:no_potion, :no_prize, :more_attack, :more_reaction]
   attribute :cost_condition
   enumerize :cost_condition, :in => [:each_plus6, :random, :manual], default: :each_plus6
-  attribute :kind_condition
-  enumerize :kind_condition, :in => [:random, :manual], default: :random
   attribute :counts
   COUNTS = [:auto, 0, 1, 2, 3, 4, 5, 6]
   COUNTS_FOR_SELECT = COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
                                                       : [I18n.t(n, scope: 'enumerize.pick.details'), n] }
+  attr_accessible :sets, :promos, :options, :cost_condition, :counts
 
   def self.for_select(options, scope)
     options.map{|o| [I18n.t(o, scope: ['enumerize.pick', scope], default: o.to_s.underscore.humanize), o] }
@@ -38,7 +39,7 @@ class Pick
     pick_id
   end
   def self.pick_id_to_card_ids(pick_id)
-    raise ArgumentError.new('number is too large') if pick_id >= self.combination(180, 10)
+    raise ArgumentError.new('number is too large') if pick_id >= combination(180, 10)
     card_ids = []
     10.downto(1) do |r|
       n = r-1
@@ -49,11 +50,35 @@ class Pick
     card_ids.sort
   end
 
+  def self.find(id)
+    self.new do |p|
+      p.id = id
+      p.cards = find_cards!(id)
+      p.appended_cards = Card.prize.order('COALESCE(cost, 0), COALESCE(potion, 0)') if p.cards.any? {|c| c.canonical_name == 'tournament' }
+    end
+  end
+
   def self.find_cards!(id)
     card_ids = pick_id_to_card_ids(id.to_i)
     cards = Card.where(:id => card_ids).order('COALESCE(cost, 0), COALESCE(potion, 0)')
     raise ::ActiveRecord::RecordNotFound, "Couldn't find Pick with ID=#{id}" if cards.any? {|c| !c.kingdom? }
     cards
+  end
+
+  def do_pick_by_card_ids
+    do_pick_by_card_ids! rescue nil
+    consistent?
+  end
+
+  def do_pick_by_card_ids!
+    self.cards = Card.where(:id => card_ids).all
+    if self.cards.size == 10 && self.cards.all?(&:kingdom?)
+      card_ids.sort!
+      self.id = Pick.card_ids_to_pick_id(card_ids)
+    else
+      orders = Hash[*(card_ids.each_with_index.map{|id, i| [id.to_i, i]}.flatten)]
+      self.cards.sort_by! {|card| orders[card.id] }
+    end
   end
 
   def do_pick!
@@ -74,58 +99,62 @@ class Pick
     id
   end
 
+  def consistent?
+    id.present?
+  end
+
   private
   def randomize
     self.sets.delete('')
-    cards = Card.kingdom.where(:set => self.sets).select([:id, :cost, :kind])
+    candidates = Card.kingdom.where(:set => self.sets).select([:id, :cost, :kind])
 
     exclude_promos = Card.promo_canonical_names - self.promos
     if self.sets.include?('promo') && exclude_promos.present?
-      cards = cards.where('canonical_name NOT IN (?)', exclude_promos)
+      candidates = candidates.where('canonical_name NOT IN (?)', exclude_promos)
     end
     if self.options.include?('no_potion')
-      cards = cards.where(:potion => nil)
+      candidates = candidates.where(:potion => nil)
     end
     if self.options.include?('no_prize')
-      cards = cards.where('canonical_name <> ?', 'tournament')
+      candidates = candidates.where('canonical_name <> ?', 'tournament')
     end
 
-    cards = cards.all
+    candidates = candidates.all
     if self.cost_condition == 'each_plus6'
       (2..5).each do |cost|
-        pots = cards.find_all {|c| c.cost == cost }
-        self.card_ids.concat(sample_card_ids(pots, 1)) unless pots.empty?
+        subdivision = candidates.find_all {|c| c.cost == cost }
+        self.card_ids.concat(sample_card_ids(subdivision, 1)) unless subdivision.empty?
       end
-      cards.delete_if {|c| self.card_ids.include?(c.id) }
-      self.card_ids.concat(sample_card_ids(cards, 10 - self.card_ids.size))
+      candidates.delete_if {|c| self.card_ids.include?(c.id) }
+      self.card_ids.concat(sample_card_ids(candidates, 10 - self.card_ids.size))
     elsif self.cost_condition == 'manual'
       self.counts.each do |cost, count|
         next if count == 'auto'
-        pots = cards.find_all {|c| c.cost == cost.to_i }
-        self.card_ids.concat(sample_card_ids(pots, count.to_i))
-        cards.delete_if {|c| c.cost == cost.to_i }
+        subdivision = candidates.find_all {|c| c.cost == cost.to_i }
+        self.card_ids.concat(sample_card_ids(subdivision, count.to_i))
+        candidates.delete_if {|c| c.cost == cost.to_i }
       end
-      self.card_ids.concat(sample_card_ids(cards, 10 - self.card_ids.size))
+      self.card_ids.concat(sample_card_ids(candidates, 10 - self.card_ids.size))
     else # cost_condition == 'random'
-      self.card_ids = sample_card_ids(cards, 10)
+      self.card_ids = sample_card_ids(candidates, 10)
     end
     self.card_ids.sort!
   end
 
-  def sample_card_ids(cards, count)
-    cards = cards.dup
-    if cards.size <= count
-      cards
+  def sample_card_ids(candidates, count)
+    candidates = candidates.dup
+    if candidates.size <= count
+      candidates
     else
       # add 2x weight
       if self.options.include?('more_attack')
-        cards.concat(cards.find_all {|c| c.kind.match('アタック') })
+        candidates.concat(candidates.find_all {|c| c.kind.match('アタック') })
       end
       if self.options.include?('more_reaction')
-        cards.concat(cards.find_all {|c| c.kind.match('リアクション') })
+        candidates.concat(candidates.find_all {|c| c.kind.match('リアクション') })
       end
       begin
-        samples = cards.sample(count)
+        samples = candidates.sample(count)
       end while samples.uniq!(&:id)
       samples
     end.map(&:id)

@@ -15,16 +15,15 @@ class CardsController < ApplicationController
     when /\w+,\w+/
       # GET /cards/1,2,3,4,5,6,7,8,9,10
       # GET /cards/1,2,3,4,5,6,7,8,9,10.json
-      card_ids = params[:id].split(',')
-      @cards = Card.where(:id => card_ids)
-      if card_ids.size == 10 && @cards.all?(&:kingdom?)
-        redirect_to pick_url(id: Pick.card_ids_to_pick_id(card_ids)), status: :moved_permanently # 301
+      @pick = Pick.new do |p|
+        p.card_ids = params[:id].split(',')
+      end
+      if @pick.do_pick_by_card_ids
+        redirect_to pick_url(@pick), status: :moved_permanently # 301
       else
-        orders = Hash[*(card_ids.each_with_index.map{|id, i| [id.to_i, i]}.flatten)]
-        @cards.sort_by! {|card| orders[card.id] }
         respond_to do |format|
           format.html { render 'picks/show' }
-          format.json { render json: @cards }
+          format.json { render json: @pick }
         end
       end
     when /\A\d+\Z/

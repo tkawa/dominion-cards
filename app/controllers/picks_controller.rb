@@ -8,12 +8,11 @@ class PicksController < ApplicationController
   # GET /picks/1
   # GET /picks/1.json
   def show
-    @cards = Pick.find_cards!(params[:id])
-    @appended_cards = Card.prize.order('COALESCE(cost, 0), COALESCE(potion, 0)') if @cards.any? {|c| c.canonical_name == 'tournament' }
+    @pick = Pick.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.haml
-      format.json { render json: @cards }
+      format.json { render json: @pick }
     end
   end
 
