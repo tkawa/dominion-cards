@@ -272,9 +272,17 @@ ja:
           '6': 6コスト
           attack: アタック
           reaction: リアクション
+  picks:
+    recommended:
+      first_game: 最初のゲーム
+      big_money: ビッグマネー
+      interaction: 相互作用
+      size_distortion: サイズ変形
+      village_square: 村の広場
   dominion_cards: ドミニオンカードピッカー
   dominion_cards_title: 'Dominion Cards [ドミニオンカードピッカー]'
   card_list: カードリスト
   random_picker: ランダムピッカー
-  picks: 選んだカード
+  picked_cards: 選んだカード
   picks_by_others: みんなが選んだカード
+  official_recommended_picks: 公式推奨セット

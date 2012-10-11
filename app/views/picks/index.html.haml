@@ -1,3 +1,11 @@
+%h1= t('official_recommended_picks')
+%section
+  %ul
+    - picks = {first_game: 41810242, big_money: 85829002, interaction: 64415525,
+               size_distortion: 81517523, village_square: 59136786}
+    - picks.each do |name, id|
+      %li= link_to t(name, scope: 'picks.recommended'), pick_path(id)
+
 %h1= t('picks_by_others')
 .timeline
   %a(class="twitter-timeline" href="https://twitter.com/search?q=dominion-cards.herokuapp.com" data-widget-id="256234896626950145")
