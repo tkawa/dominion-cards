@@ -1,7 +1,7 @@
 class CreatePickNames < ActiveRecord::Migration
   def change
     create_table :pick_names do |t|
-      t.belongs_to :pick, null: false
+      t.integer :pick_id, null: false, limit: 8
       t.string :name, null: false
       t.string :name_j
       t.string :canonical_name, null: false

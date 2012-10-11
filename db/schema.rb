@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(:version => 20121011121506) do
   add_index "cards", ["name_j"], :name => "index_cards_on_name_j", :unique => true
 
   create_table "pick_names", :force => true do |t|
-    t.integer "pick_id",        :null => false
-    t.string  "name",           :null => false
+    t.integer "pick_id",        :limit => 8, :null => false
+    t.string  "name",                        :null => false
     t.string  "name_j"
-    t.string  "canonical_name", :null => false
+    t.string  "canonical_name",              :null => false
     t.text    "description"
   end
 
