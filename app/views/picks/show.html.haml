@@ -22,8 +22,8 @@
         data: {lang: 'ja', count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@pick.cards.map(&:name_j).join(' ')}」を選びました！"}
       %p.pick_id ##{@pick.id}
 
-.form-actions
-  - if @pick.sets.present?
+- if @pick.sets.present?
+  .form-actions
     = form_for @pick do |f|
       - [:sets, :promos, :options].each do |attr|
         - @pick.send(attr).each do |value|
@@ -33,7 +33,7 @@
         - @pick.counts.each_key do |cost|
           = field.hidden_field cost, id: nil
       = f.submit t('helpers.submit.pick.repick'), id: 'repick'
-  = link_to t('helpers.links.back'), root_path, :class => 'back'
+    = link_to t('helpers.links.back'), root_path, :class => 'back'
 
 - [@pick.cards, @pick.appended_cards].each do |cards|
   - cards.each do |card|

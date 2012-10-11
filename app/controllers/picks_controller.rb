@@ -9,7 +9,7 @@ class PicksController < ApplicationController
   # GET /picks/1.json
   def show
     @pick = Pick.find(params[:id])
-    @pick.write_conditions(flash[:preceding]) if flash[:preceding]
+    @pick.write_conditions(session[:preceding]) if flash[:preceding]
 
     respond_to do |format|
       format.html # show.html.haml
@@ -23,7 +23,8 @@ class PicksController < ApplicationController
     @pick = Pick.new(params[:pick])
 
     @pick.do_pick!
-    redirect_to pick_url(@pick), flash: {preceding: params[:pick]}, status: :see_other # 303
+    session[:preceding] = params[:pick]
+    redirect_to pick_url(@pick), flash: {preceding: true}, status: :see_other # 303
   end
 
   private

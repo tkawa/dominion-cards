@@ -81,6 +81,8 @@ a.back {
   @extend .btn;
   @extend .btn-large;
   @extend .btn-block;
+}
+form + a.back {
   margin-top: 10px;
 }
 
