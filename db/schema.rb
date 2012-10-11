@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005073244) do
+ActiveRecord::Schema.define(:version => 20121011121506) do
 
   create_table "cards", :force => true do |t|
     t.string  "name_j",         :null => false
@@ -36,5 +36,18 @@ ActiveRecord::Schema.define(:version => 20121005073244) do
   add_index "cards", ["canonical_name"], :name => "index_cards_on_canonical_name", :unique => true
   add_index "cards", ["name"], :name => "index_cards_on_name", :unique => true
   add_index "cards", ["name_j"], :name => "index_cards_on_name_j", :unique => true
+
+  create_table "pick_names", :force => true do |t|
+    t.integer "pick_id",        :null => false
+    t.string  "name",           :null => false
+    t.string  "name_j"
+    t.string  "canonical_name", :null => false
+    t.text    "description"
+  end
+
+  add_index "pick_names", ["canonical_name"], :name => "index_pick_names_on_canonical_name", :unique => true
+  add_index "pick_names", ["name"], :name => "index_pick_names_on_name", :unique => true
+  add_index "pick_names", ["name_j"], :name => "index_pick_names_on_name_j", :unique => true
+  add_index "pick_names", ["pick_id"], :name => "index_pick_names_on_pick_id", :unique => true
 
 end

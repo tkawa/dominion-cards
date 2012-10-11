@@ -2,7 +2,15 @@ class PicksController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
   rescue_from ConditionInvalid, with: :see_cards
 
+  # GET /picks
+  # GET /picks.json
   def index
+    @pick_names = PickName.all
+
+    respond_to do |format|
+      format.html # index.html.haml
+      format.json { render json: @pick_names }
+    end
   end
 
   # GET /picks/1

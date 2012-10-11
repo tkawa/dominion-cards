@@ -1,10 +1,8 @@
 %h1= t('official_recommended_picks')
 %section
   %ul
-    - picks = {first_game: 41810242, big_money: 85829002, interaction: 64415525,
-               size_distortion: 81517523, village_square: 59136786}
-    - picks.each do |name, id|
-      %li= link_to t(name, scope: 'picks.recommended'), pick_path(id)
+    - @pick_names.each do |pick_name|
+      %li= link_to t(pick_name.canonical_name.underscore, scope: 'picks.recommended', default: pick_name.name), pick_path(pick_name.pick_id)
 
 %h1= t('picks_by_others')
 .timeline
