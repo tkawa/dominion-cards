@@ -5,11 +5,11 @@ class PicksController < ApplicationController
   # GET /picks
   # GET /picks.json
   def index
-    @pick_names = PickName.all
+    @picks = PickName.all
 
     respond_to do |format|
       format.html # index.html.haml
-      format.json { render json: @pick_names }
+      format.json { render json: @picks }
     end
   end
 

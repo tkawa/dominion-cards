@@ -274,11 +274,17 @@ ja:
           reaction: リアクション
   picks:
     recommended:
-      first_game: 最初のゲーム
-      big_money: ビッグマネー
+      first-game: 最初のゲーム
+      big-money: ビッグマネー
       interaction: 相互作用
-      size_distortion: サイズ変形
-      village_square: 村の広場
+      size-distortion: サイズ変形
+      village-square: 村の広場
+      victory-dance: 勝利の舞
+      secret-schemes: 秘密計画
+      best-wishes: 願い
+      deconstruction: 脱構築
+      hand-madness: 手札熱狂
+      underlings: 下役たち
   dominion_cards: ドミニオンカードピッカー
   dominion_cards_title: 'Dominion Cards [ドミニオンカードピッカー]'
   card_list: カードリスト
