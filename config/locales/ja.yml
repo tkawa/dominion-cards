@@ -276,3 +276,5 @@ ja:
   dominion_cards_title: 'Dominion Cards [ドミニオンカードピッカー]'
   card_list: カードリスト
   random_picker: ランダムピッカー
+  picks: 選んだカード
+  picks_by_others: みんなが選んだカード
