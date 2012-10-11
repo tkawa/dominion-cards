@@ -22,7 +22,7 @@
         data: {lang: 'ja', count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@pick.cards.map(&:name_j).join(' ')}」を選びました！"}
       %p.pick_id ##{@pick.id}
 
-- if @pick.sets.present?
+- if flash[:preceding]
   .form-actions
     = form_for @pick do |f|
       - [:sets, :promos, :options].each do |attr|

@@ -9,7 +9,7 @@ class PicksController < ApplicationController
   # GET /picks/1.json
   def show
     @pick = Pick.find(params[:id])
-    @pick.write_conditions(session[:preceding]) if flash[:preceding]
+    @pick.assign_attributes(session[:preceding]) if session[:preceding]
 
     respond_to do |format|
       format.html # show.html.haml

@@ -95,12 +95,6 @@ class Pick
     do_pick! rescue false
   end
 
-  def write_conditions(params)
-    params.each do |name, value|
-      write_attribute(name, value)
-    end
-  end
-
   def to_param
     id
   end
