@@ -77,12 +77,12 @@ input#repick {
   @extend .btn-block;
   @extend .btn-primary;
 }
-a.back {
+a.back, a.preceding {
   @extend .btn;
   @extend .btn-large;
   @extend .btn-block;
 }
-form + a.back {
+form + a {
   margin-top: 10px;
 }
 

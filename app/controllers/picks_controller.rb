@@ -32,6 +32,7 @@ class PicksController < ApplicationController
 
     @pick.do_pick!
     session[:preceding] = params[:pick]
+    session[:preceding_id] = @pick.id
     redirect_to pick_url(@pick), flash: {preceding: true}, status: :see_other # 303
   end
 

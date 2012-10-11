@@ -290,5 +290,6 @@ ja:
   card_list: カードリスト
   random_picker: ランダムピッカー
   picked_cards: 選んだカード
-  picks_by_others: みんなが選んだカード
+  preceding_pick: 直前に選んだカード
   official_recommended_picks: 公式推奨セット
+  picks_by_others: みんなが選んだカード
