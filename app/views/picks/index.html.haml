@@ -3,12 +3,14 @@
     = link_to t('preceding_pick'), pick_path(id: session[:preceding_id]), :class => 'preceding'
 
 %h1= t('official_recommended_picks')
-%section
+.section-body
   %ul
     - @picks.each do |pick|
       %li
-        = link_to t(pick.canonical_name, scope: 'picks.recommended', default: pick.name), pick_path(pick.pick_id)
-        (#{pick.cards.sort_by(&:id).map{|c| t(c.set, scope: 'enumerize.card.set')}.uniq.join(', ')})
+        %span.name
+          = link_to t(pick.canonical_name, scope: 'picks.recommended', default: pick.name), pick_path(pick.pick_id)
+        - pick.cards.sort_by(&:id).map{|c| c.set.text}.uniq.each do |set|
+          %span.set= set
 
 %h1= t('picks_by_others')
 .timeline
