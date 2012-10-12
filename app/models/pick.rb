@@ -16,12 +16,14 @@ class Pick
   enumerize :cost_condition, in: [:each_plus6, :random, :manual], default: :each_plus6
   attribute :counts, default: {}
   COUNTS = [:auto, 0, 1, 2, 3, 4, 5, 6]
-  COUNTS_FOR_SELECT = COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
-                                                      : [I18n.t(n, scope: 'enumerize.pick.details'), n] }
   attr_accessible :sets, :promos, :options, :cost_condition, :counts
 
   def self.for_select(options, scope)
     options.map{|o| [I18n.t(o, scope: ['enumerize.pick', scope], default: o.to_s.underscore.humanize), o] }
+  end
+  def self.counts_for_select
+    COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
+                                    : [I18n.t(n, scope: 'enumerize.pick.details'), n] }
   end
 
   # ready for Pascal's triangle table

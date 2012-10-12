@@ -88,6 +88,9 @@ form + a {
 
 .picks {
   margin-top: 12px;
+  .images img {
+    width: 72px;
+  }
   ul {
     @extend .unstyled;
     margin: 10px 15px;

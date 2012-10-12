@@ -13,13 +13,13 @@
         %li
           %span.coin= card.cost_p
           %span.name
-            = link_to card.name_j, "##{card.canonical_name}"
+            = link_to card.name_t, "##{card.canonical_name}"
           %span.set= card.set.text
 
   - if @pick.consistent?
     .tweet_button
-      = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button",
-        data: {lang: 'ja', count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@pick.cards.map(&:name_j).join(' ')}」を選びました！"}
+      = link_to t('tweet'), "https://twitter.com/share", class: "twitter-share-button",
+        data: {lang: I18n.locale, count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@pick.cards.map(&:name_j).join(' ')}」を選びました！"}
       %p.pick_info
         = content_tag :span, @pick.pick_name.quoted_name, class: 'pick_name' if @pick.pick_name
         %span.pick_id ##{@pick.id}
@@ -41,7 +41,7 @@
   - cards.each do |card|
     %section.card{id: card.canonical_name}
       %header
-        %h2.name= card.name_j
+        %h2.name= card.name_t
         %span.coin= card.cost_p
         %span.set= card.set.text
         %span.kind= card.kind

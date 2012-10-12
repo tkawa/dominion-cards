@@ -14,5 +14,5 @@
 
 %h1= t('picks_by_others')
 .timeline
-  %a.twitter-timeline(href="https://twitter.com/search?q=dominion-cards.herokuapp.com" data-widget-id="256234896626950145" data-lang="ja")
-    = t('picks_by_others')
+  = link_to t('picks_by_others'), 'https://twitter.com/search?q=dominion-cards.herokuapp.com',
+            class: 'twitter-timeline', data: { 'widget-id' => '256234896626950145', lang: I18n.locale }

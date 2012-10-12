@@ -10,7 +10,7 @@
     %fieldset#cost_details.details
       = f.simple_fields_for :counts, OpenStruct.new(@pick.counts) do |field|
         - (2..6).each do |cost|
-          = field.input cost, collection: Pick::COUNTS_FOR_SELECT, prompt: nil, wrapper: :default, required: false, input_html: { class: 'pick_counts' }, label_html: { class: 'pick_counts' }
+          = field.input cost, collection: Pick.counts_for_select, prompt: nil, wrapper: :default, required: false, input_html: { class: 'pick_counts' }, label_html: { class: 'pick_counts' }
     = f.submit id: 'pick'
   - if session[:preceding_id]
     = link_to t('preceding_pick'), pick_path(id: session[:preceding_id]), :class => 'preceding'

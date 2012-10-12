@@ -209,6 +209,11 @@ en:
     attributes:
       card:
         name_j: Name (ja)
+        cards: +Cards
+        actions: +Actions
+        buys: +Buys
+        coins: +Coins
+        vp_tokens: +VP tokens
   enumerize:
     pick:
       cost_condition:
