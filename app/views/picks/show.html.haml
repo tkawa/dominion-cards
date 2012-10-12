@@ -20,7 +20,9 @@
     .tweet_button
       = link_to 'ツイート', "https://twitter.com/share", class: "twitter-share-button",
         data: {lang: 'ja', count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@pick.cards.map(&:name_j).join(' ')}」を選びました！"}
-      %p.pick_id ##{@pick.id}
+      %p.pick_info
+        = content_tag :span, @pick.pick_name.quoted_name, class: 'pick_name' if @pick.pick_name
+        %span.pick_id ##{@pick.id}
 
 - if flash[:preceding]
   .form-actions

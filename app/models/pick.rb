@@ -6,6 +6,7 @@ class Pick
   attribute :id
   attribute :cards
   attribute :appended_cards, default: []
+  attribute :pick_name
   attribute :card_ids, default: []
   attribute :sets, default: []
   attribute :promos, default: []
@@ -55,6 +56,7 @@ class Pick
       p.id = id
       p.cards = find_cards!(id)
       p.appended_cards = Card.prize.order('COALESCE(cost, 0), COALESCE(potion, 0)') if p.cards.any? {|c| c.canonical_name == 'tournament' }
+      p.pick_name = PickName.find_by_pick_id(id)
     end
   end
 

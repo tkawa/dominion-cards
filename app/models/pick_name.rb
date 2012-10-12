@@ -18,4 +18,9 @@ class PickName < ActiveRecord::Base
   def pick
     @pick ||= Pick.find(pick_id)
   end
+
+  def quoted_name
+    translated = I18n.t(canonical_name, scope: 'picks.recommended', default: name)
+    I18n.t('quote.default', text: ERB::Util.h(translated), default: "&ldquo;#{ERB::Util.h(translated)}&rdquo;").html_safe
+  end
 end
