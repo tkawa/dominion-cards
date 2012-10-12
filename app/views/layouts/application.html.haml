@@ -28,9 +28,9 @@
           = link_to 'Dominion Cards', root_path, class: 'brand'
           .container.nav-collapse
             %ul.nav
-              %li= link_to t('card_list'), cards_path
               %li= link_to t('random_picker'), root_path
-              %li= link_to t('picked_cards'), picks_path
+              %li= link_to t('past_recommended_picks'), picks_path
+              %li= link_to t('card_list'), cards_path
 
     .container-fluid
       = render 'layouts/messages'

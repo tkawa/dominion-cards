@@ -332,9 +332,9 @@ ja:
       traveling-circus: 旅一座
   dominion_cards: ドミニオンカードピッカー
   dominion_cards_title: 'Dominion Cards [ドミニオンカードピッカー]'
-  card_list: カードリスト
+  card_list: 全カードリスト
   random_picker: ランダムピッカー
-  picked_cards: 選んだカード
+  past_recommended_picks: 過去と推奨のセット
   preceding_pick: 直前に選んだカード
   official_recommended_picks: 公式推奨セット
   picks_by_others: みんなが選んだカード
