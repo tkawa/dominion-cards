@@ -23,7 +23,7 @@ class Card < ActiveRecord::Base
     if I18n.locale == :ja
       "http://dominion-cards.s3-ap-northeast-1.amazonaws.com/#{size}-ja/#{canonical_name.underscore.camelize.gsub(/\s/, '')}.png"
     else
-      "http://www.dominiondeck.com/sites/default/files/imagecache/cards-large/cards/#{canonical_name}.jpg"
+      "http://dominion.diehrstraits.com/scans/#{set.to_s.gsub('_', '')}/#{canonical_name.gsub('-', '')}.jpg"
     end
   end
   def kingdom?
