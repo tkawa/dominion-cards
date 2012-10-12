@@ -116,6 +116,11 @@ section.card {
   header > * {
     display: inline;
   }
+  footer {
+    margin-top: -20px;
+    padding: 0 4px;
+    text-align: right;
+  }
 }
 h2.name {
   font-size: 20px;

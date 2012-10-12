@@ -47,6 +47,9 @@
         %span.kind= card.kind
       .description
         = card.description.html_safe
+      %footer
+        = link_to card do
+          %i.icon-info-sign
 
 .form-actions
   = link_to t('helpers.links.back'), root_path, :class => 'back'
