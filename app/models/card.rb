@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 class Card < ActiveRecord::Base
   include Enumerize
-  enumerize :set, :in => [:base, :intrigue, :seaside, :alchemy, :prosperity, :cornucopia, :hinterlands, :dark_ages, :promo]
+  enumerize :set, in: [:base, :intrigue, :seaside, :alchemy, :prosperity, :cornucopia, :hinterlands, :dark_ages, :promo]
 
-  scope :kingdom, -> { where(:division => '王国') }
-  scope :prize, -> { where(:division => '褒賞') }
-  scope :promos, -> { where(:set => 'promo') }
+  scope :kingdom, -> { where(division: '王国') }
+  scope :prize, -> { where(division: '褒賞') }
+  scope :promos, -> { where(set: 'promo') }
 
   def self.promo_canonical_names
     promos.pluck(:canonical_name)

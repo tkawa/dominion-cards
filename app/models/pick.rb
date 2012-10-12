@@ -12,7 +12,7 @@ class Pick
   attribute :options, default: []
   OPTIONS = [:no_potion, :no_prize, :more_attack, :more_reaction]
   attribute :cost_condition
-  enumerize :cost_condition, :in => [:each_plus6, :random, :manual], default: :each_plus6
+  enumerize :cost_condition, in: [:each_plus6, :random, :manual], default: :each_plus6
   attribute :counts, default: {}
   COUNTS = [:auto, 0, 1, 2, 3, 4, 5, 6]
   COUNTS_FOR_SELECT = COUNTS.map{|n| n.is_a?(Integer) ? [I18n.t('enumerize.pick.details.number', count: n), n]
@@ -60,7 +60,7 @@ class Pick
 
   def self.find_cards!(id)
     card_ids = pick_id_to_card_ids(id.to_i)
-    cards = Card.where(:id => card_ids).order('COALESCE(cost, 0), COALESCE(potion, 0)')
+    cards = Card.where(id: card_ids).order('COALESCE(cost, 0), COALESCE(potion, 0)')
     raise ::ActiveRecord::RecordNotFound, "Couldn't find Pick with ID=#{id}" if cards.any? {|c| !c.kingdom? }
     cards
   end
@@ -71,7 +71,7 @@ class Pick
   end
 
   def do_pick_by_card_ids!
-    self.cards = Card.where(:id => card_ids).all
+    self.cards = Card.where(id: card_ids).all
     if self.cards.size == 10 && self.cards.all?(&:kingdom?)
       card_ids.sort!
       self.id = Pick.card_ids_to_pick_id(card_ids)
@@ -106,14 +106,14 @@ class Pick
   private
   def randomize
     self.sets.delete('')
-    candidates = Card.kingdom.where(:set => self.sets).select([:id, :cost, :kind])
+    candidates = Card.kingdom.where(set: self.sets).select([:id, :cost, :kind])
 
     exclude_promos = Card.promo_canonical_names - self.promos
     if self.sets.include?('promo') && exclude_promos.present?
       candidates = candidates.where('canonical_name NOT IN (?)', exclude_promos)
     end
     if self.options.include?('no_potion')
-      candidates = candidates.where(:potion => nil)
+      candidates = candidates.where(potion: nil)
     end
     if self.options.include?('no_prize')
       candidates = candidates.where('canonical_name <> ?', 'tournament')
