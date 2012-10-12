@@ -5,7 +5,7 @@ class PicksController < ApplicationController
   # GET /picks
   # GET /picks.json
   def index
-    @picks = PickName.all
+    @picks = PickName.order(:id).all
 
     respond_to do |format|
       format.html # index.html.haml

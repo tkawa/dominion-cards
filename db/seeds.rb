@@ -30,3 +30,10 @@ File.open('log/data.dat', 'r:CP932:UTF-8', invalid: :replace) do |f|
     end
   end
 end
+
+#File.open('log/recommended.dat') do |f|
+#  f.each_line do |l|
+#    p = PickName.build_from_names(l.chomp)
+#    p.save!
+#  end
+#end

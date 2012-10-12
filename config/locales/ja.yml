@@ -275,7 +275,7 @@ ja:
   picks:
     recommended:
       first-game: 最初のゲーム
-      big-money: ビッグマネー
+      big-money: ビッグ・マネー
       interaction: 相互作用
       size-distortion: サイズ変形
       village-square: 村の広場
@@ -285,6 +285,49 @@ ja:
       deconstruction: 脱構築
       hand-madness: 手札熱狂
       underlings: 下役たち
+      high-seas: 外洋
+      buried-treasure: 埋蔵金
+      shipwrecks: 難破船
+      reach-for-tomorrow: 明日への架け橋
+      repetition: 反復
+      give-and-take: ギブ＆テイク
+      forbidden-arts: 禁断の芸術
+      potion-mixers: 薬剤調合師たち
+      chemistry-lesson: 科学実験
+      servants: 神のしもべ
+      secret-research: 秘密調査
+      pools-tools-and-fools: プールとツールとフール
+      beginners: 初心者
+      friendly-interactive: 好意的な相互作用
+      big-actions: ビッグ・アクション
+      biggest-money: 巨費
+      the-kings-army: 王の軍隊
+      the-good-life: 良き人生
+      paths-to-victory: 勝利への道
+      all-along-the-watchtower: 見張りの塔からずっと
+      lucky-seven: ラッキーセブン
+      bounty-of-the-hunt: 賞金稼ぎ
+      bad-omens: 凶兆
+      the-jesters-workshop: 道化師の仕事場
+      last-laughs: 最後に笑う者
+      the-spice-of-life: 刺激的人生
+      small-victories: 小さな勝利
+      introduction: 入門
+      fair-trades: 公平な取引
+      bargains: バーゲン
+      gambits: 初めの一手
+      highway-robbery: 辻強盗
+      adventures-abroad: 異国への冒険
+      money-for-nothing: 無駄金
+      the-dukes-ball: 公爵の舞踏会
+      travelers: 旅行者たち
+      diplomacy: 外交
+      schemes-and-dreams: 画策と夢
+      wine-country: ワインカントリー
+      instant-gratification: その場の満足
+      treasure-trove: 貴重な発見
+      blue-harvest: 青田刈り
+      traveling-circus: 旅一座
   dominion_cards: ドミニオンカードピッカー
   dominion_cards_title: 'Dominion Cards [ドミニオンカードピッカー]'
   card_list: カードリスト
