@@ -19,7 +19,7 @@
   - if @pick.consistent?
     .tweet_button
       = link_to t('tweet'), "https://twitter.com/share", class: "twitter-share-button",
-        data: {lang: I18n.locale, count: 'none', size: 'large', text: "#{t('dominion_cards_title')}: 「#{@pick.cards.map(&:name_j).join(' ')}」を選びました！"}
+        data: {lang: I18n.locale, count: 'none', size: 'large', text: picked_tweet_text(@pick.cards)}
       %p.pick_info
         = content_tag :span, @pick.pick_name.quoted_name, class: 'pick_name' if @pick.pick_name
         %span.pick_id ##{@pick.id}

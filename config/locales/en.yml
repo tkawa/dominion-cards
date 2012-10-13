@@ -232,3 +232,5 @@ en:
           '6': 6cost
   dominion_cards: Dominion Card Picker
   dominion_cards_title: Dominion Cards
+  picked_tweet:
+    format: 'Picked “%{cards}”'

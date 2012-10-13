@@ -339,3 +339,6 @@ ja:
   official_recommended_picks: 公式推奨セット
   picks_by_others: みんなが選んだカード
   tweet: ツイート
+  picked_tweet:
+    format: 'ドミニオンカードピッカー: 「%{cards}」を選びました！'
+    cards_connector: ' '
