@@ -9,11 +9,8 @@ body { padding-top: 60px; }
     margin-left: 10px;
   }
   .actionbar {
-    a {
-      cursor: pointer;
-    }
     .brand {
-      padding: 5px 10px;
+      padding: 5px 5px 5px 10px;
       img.icon {
         height: 30px;
         width: 30px;
@@ -24,8 +21,8 @@ body { padding-top: 60px; }
     }
     .dropdown .dropdown-toggle {
       font-size: 16px;
-      margin-right: 10px;
-      padding-right: 5px;
+      margin-right: 5px;
+      padding: 10px 5px;
       &:after {
         position: relative;
         top: 10px;
@@ -42,14 +39,26 @@ body { padding-top: 60px; }
     .dropdown > .dropdown-menu {
       @include border-radius(4px);
       a {
-        padding: 10px 15px;
+        padding: 10px 5px;
         font-size: 16px;
       }
     }
-    .nav .dropdown > .dropdown-menu {
-      &:before, &:after {
-        display: none;
+    .nav {
+      .dropdown > .dropdown-menu {
+        &:before, &:after {
+          display: none;
+        }
       }
+      & > li > a {
+        cursor: pointer;
+        padding: 10px 5px;
+      }
+      & > li > a.iconbtn {
+        padding: 5px;
+      }
+    }
+    .nav.pull-right {
+      margin: 0;
     }
   }
 }

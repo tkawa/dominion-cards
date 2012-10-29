@@ -22,8 +22,8 @@
       .navbar-inner
         .container-fluid
           %a.brand
-            = image_tag 'window.png', class: 'icon', size: '30x30'
-            %span.brandtitle Domi
+            = image_tag 'template.png', class: 'icon', size: '30x30'
+            %span.brandtitle Dominion
           .container
             %ul.nav
               %li.dropdown
@@ -33,6 +33,10 @@
                   %li= link_to t('random_picker'), root_path
                   %li= link_to t('past_recommended_picks'), picks_path
                   %li= link_to t('card_list'), cards_path
+            -#%ul.nav.pull-right
+              %li
+                %a.iconbtn
+                  = image_tag 'floppy_disk_32.png', class: 'icon', size: '28x28'
 
     .container-fluid
       = render 'layouts/messages'
