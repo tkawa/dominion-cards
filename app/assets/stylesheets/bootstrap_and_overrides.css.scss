@@ -8,6 +8,50 @@ body { padding-top: 60px; }
   .dl-horizontal dd {
     margin-left: 10px;
   }
+  .actionbar {
+    a {
+      cursor: pointer;
+    }
+    .brand {
+      padding: 5px 10px;
+      img.icon {
+        height: 30px;
+        width: 30px;
+      }
+      .brandtitle {
+        padding: 5px 0;
+      }
+    }
+    .dropdown .dropdown-toggle {
+      font-size: 16px;
+      margin-right: 10px;
+      padding-right: 5px;
+      &:after {
+        position: relative;
+        top: 10px;
+        display: inline-block;
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-left: 5px solid transparent;
+        border-right: 5px solid #555555;
+        border-bottom: 5px solid #555555;
+      }
+    }
+    .dropdown > .dropdown-menu {
+      @include border-radius(4px);
+      a {
+        padding: 10px 15px;
+        font-size: 16px;
+      }
+    }
+    .nav .dropdown > .dropdown-menu {
+      &:before, &:after {
+        display: none;
+      }
+    }
+  }
 }
 input.ios[type='checkbox'] {
   -webkit-appearance:none;
