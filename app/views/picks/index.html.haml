@@ -1,3 +1,5 @@
+- content_for :content_title, t('past_recommended_picks')
+
 - if session[:preceding_id]
   %h1
     = link_to t('preceding_pick'), pick_path(id: session[:preceding_id]), :class => 'preceding'

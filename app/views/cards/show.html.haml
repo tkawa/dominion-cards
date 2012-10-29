@@ -1,3 +1,5 @@
+- content_for :content_title, t('card_list')
+
 .page-header
   %h1= @card.name_t
   = image_tag(@card.image_url, alt: @card.name)
