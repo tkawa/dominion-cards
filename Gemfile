@@ -46,7 +46,7 @@ gem 'ruby_parser', '>= 2.3.1', :group => :development
 gem 'rspec-rails', '>= 2.11.0', :group => [:development, :test]
 gem 'capybara', '>= 1.1.2', :group => :test
 gem 'factory_girl_rails', '>= 4.0.0', :group => [:development, :test]
-gem 'bootstrap-sass', '>= 2.1.0.0'
+gem 'bootstrap-sass', '~> 2.1.1.0'
 gem 'simple_form', '>= 2.0.2'
 gem 'i18n_generators', :group => :development
 gem 'enumerize'
