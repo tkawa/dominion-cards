@@ -61,3 +61,11 @@ else
 $('body').on 'touchstart.dropdown.data-api', '.dropdown-menu', (e) ->
   e.stopPropagation()
   null
+
+enable_to_back = (url) ->
+  $link = $('.actionbar a.brand')
+  $link.addClass('backable')
+  if url?
+    $link.attr('href', url)
+  else if (not $link.attr('href')?) or ($link.attr('href') == '#')
+    $link.attr('href', 'javascript:history.back();')

@@ -18,6 +18,7 @@ class PicksController < ApplicationController
   def show
     @pick = Pick.find(params[:id])
     @pick.assign_attributes(session[:preceding]) if session[:preceding]
+    @backable = true if flash[:preceding]
 
     respond_to do |format|
       format.html # show.html.haml

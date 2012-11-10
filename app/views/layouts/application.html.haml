@@ -21,7 +21,7 @@
     .navbar.navbar-fixed-top.actionbar
       .navbar-inner
         .container-fluid
-          %a.brand
+          %a.brand{class: @backable ? 'backable' : nil, href: @backable ? 'javascript:history.back();' : nil}
             = image_tag 'template.png', class: 'icon', size: '30x30'
             %span.brandtitle Dominion
           .container

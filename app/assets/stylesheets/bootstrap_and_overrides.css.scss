@@ -39,6 +39,15 @@ input.ios[type='checkbox']:checked {
       padding: 5px 0;
     }
   }
+  a.brand.backable {
+    padding-left: 3px;
+    &:before {
+      display: inline-block;
+      content: '\2329';
+      font-size: 18px;
+      text-shadow: 1px 0;
+    }
+  }
   .dropdown .dropdown-toggle {
     font-size: 16px;
     //margin-right: 5px;
