@@ -28,7 +28,20 @@ input.ios[type='checkbox']:checked {
   position: fixed;
   margin: 0;
 }
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .actionbar {
+  .container {
+    white-space: nowrap;
+    & > * {
+      float: none;
+      display: inline-block;
+    }
+  }
   .brand {
     padding: 5px 5px 5px 10px;
     img.icon {
@@ -36,6 +49,8 @@ input.ios[type='checkbox']:checked {
       width: 30px;
     }
     .brandtitle {
+      @extend .ellipsis;
+      display: inline-block;
       padding: 5px 0;
     }
   }
@@ -80,12 +95,15 @@ input.ios[type='checkbox']:checked {
         display: none;
       }
     }
-    & > li > a {
-      cursor: pointer;
-      padding: 10px 5px;
-    }
-    & > li > a.iconbtn {
-      padding: 5px;
+    & > li {
+      float: none;
+      & > a {
+        cursor: pointer;
+        padding: 10px 5px;
+        &.iconbtn {
+          padding: 5px;
+        }
+      }
     }
   }
   .nav.pull-right {

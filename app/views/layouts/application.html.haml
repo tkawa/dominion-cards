@@ -20,19 +20,18 @@
   %body
     .navbar.navbar-fixed-top.actionbar
       .navbar-inner
-        .container-fluid
+        .container
           %a.brand{class: @backable ? 'backable' : nil, href: @backable ? 'javascript:history.back();' : nil}
             = image_tag 'template.png', class: 'icon', size: '30x30'
             %span.brandtitle Dominion
-          .container
-            %ul.nav
-              %li.dropdown
-                %a.dropdown-toggle(data-toggle="dropdown")
-                  = content_for?(:content_title) ? yield(:content_title) : 'menu'
-                %ul.dropdown-menu
-                  %li= link_to t('random_picker'), root_path
-                  %li= link_to t('past_recommended_picks'), picks_path
-                  %li= link_to t('card_list'), cards_path
+          %ul.nav
+            %li.dropdown
+              %a.dropdown-toggle(data-toggle="dropdown")
+                = content_for?(:content_title) ? yield(:content_title) : 'menu'
+              %ul.dropdown-menu
+                %li= link_to t('random_picker'), root_path
+                %li= link_to t('past_recommended_picks'), picks_path
+                %li= link_to t('card_list'), cards_path
             -#%ul.nav.pull-right
               %li
                 %a.iconbtn
