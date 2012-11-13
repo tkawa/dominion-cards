@@ -55,11 +55,11 @@ input.ios[type='checkbox']:checked {
     }
   }
   a.brand.backable {
-    padding-left: 3px;
+    padding-left: 0;
     &:before {
       display: inline-block;
-      content: '\2329';
-      font-size: 18px;
+      content: '\3008';
+      font-size: 16px;
       text-shadow: 1px 0;
     }
   }
