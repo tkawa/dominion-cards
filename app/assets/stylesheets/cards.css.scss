@@ -56,7 +56,9 @@ fieldset.details {
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 input.radio_buttons[type='radio'] {
+  @extend input.ios[type='radio'];
   float: right;
+  margin: 0 25px 0 0;
 }
 label.pick_counts {
   display: inline;

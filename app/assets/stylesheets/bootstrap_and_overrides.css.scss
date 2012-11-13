@@ -10,17 +10,26 @@
 }
 
 input.ios[type='checkbox'] {
-  -webkit-appearance:none;
+  -webkit-appearance: none;
+  //-moz-appearance: none; // not styled on Firefox
   display: block;
   width: 77px;
   height: 27px;
   background: url(toggle.png) no-repeat -51px 0;
   border-radius: 30px;
   -webkit-background-size: 128px 27px;
-  -webkit-transition: 0.3s;
+  //@include background-size(128px 27px); // not styled on Firefox
+  @include transition(0.3s);
 }
 input.ios[type='checkbox']:checked {
   background-position: 0 0;
+}
+input.ios[type='radio'] {
+  // not styling yet
+  display: block;
+  width: 27px;
+  height: 27px;
+  @include transition(0.3s);
 }
 
 // actionbar
@@ -52,6 +61,7 @@ input.ios[type='checkbox']:checked {
       @extend .ellipsis;
       display: inline-block;
       padding: 5px 0;
+      vertical-align: middle;
     }
   }
   a.brand.backable {
