@@ -55,12 +55,22 @@ if ns.positionFixedUnavailable
   $('body').css('padding-top', '')
 else
   $('.navbar-fixed-top').addClass('fixed-available')
-  $('body').css('padding-top', '50px')
+  $('body').css('padding-top', '60px')
 
 # dropdown fix for iOS
 $('body').on 'touchstart.dropdown.data-api', '.dropdown-menu', (e) ->
   e.stopPropagation()
   null
+
+# add ellipsis to brandtitle
+$brandtitle = $('.actionbar .brand .brandtitle')
+$container_last = $brandtitle.closest('.container').children(':last')
+$(window).resize ->
+  $brandtitle.css('width', '')
+  gap = $container_last.offset().left + $container_last.width() - $(@).width()
+  if gap > 0
+    $brandtitle.width (i, w) -> w - gap
+.resize()
 
 enable_to_back = (url) ->
   $link = $('.actionbar a.brand')
